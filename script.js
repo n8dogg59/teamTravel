@@ -1,0 +1,1 @@
+var virusKey = config.CORONA_KEY;

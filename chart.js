@@ -55,7 +55,7 @@ function BuildChart(labels, values, chartTitle) {
 }
 // Map JSON values back to label array
 var labels = json.map(function (e) {
-  return e.year;
+  return e.week;
 });
 console.log(labels); // ["2016", "2017", "2018", "2019"]
 

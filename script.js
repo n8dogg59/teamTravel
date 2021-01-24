@@ -39,7 +39,7 @@ console.log(county);
     fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/US-TX/", {
             "method": "GET",
             "headers": {
-                "x-rapidapi-key": virusKey,
+                "x-rapidapi-key": "virusKey",
                 "x-rapidapi-host": "coronavirus-smartable.p.rapidapi.com"
             }
         })

@@ -6,11 +6,49 @@
     <title>Document</title>
 </head>
 <body>
-
-    
+    <table class="table" id="dataTable">
+        <thead>
+          <th>Year</th>
+          <th>Items Sold</th>
+          <th>Turnover ($)</th>
+          <th>Profit ($)</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2016</td>
+            <td>10</td>
+            <td>200</td>
+            <td>89</td>
+          </tr>
+          <tr>
+            <td>2017</td>
+            <td>25</td>
+            <td>550</td>
+            <td>225</td>
+          </tr>
+          <tr>
+            <td>2018</td>
+            <td>55</td>
+            <td>1200</td>
+            <td>600</td>
+          </tr>
+          <tr>
+            <td>2019</td>
+            <td>120</td>
+            <td>2450</td>
+            <td>1100</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="chart">
+        <canvas id="myChart"></canvas>
+      </div>
+      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./config.js"></script>
-    <script src="./script.js"></script>
+    <script src="chart.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

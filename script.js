@@ -111,6 +111,8 @@ $(document).ready(function() {
                                 var weekFiveTotalCases = weekFiveTotalCases + response[i].positiveIncrease;
                             }
                         }
+                        document.getElementById("week1Cases").innerHTML = weekOneTotalCases;
+                        
                         console.log(weekOneTotalCases);  
                         console.log(weekTwoTotalCases);                    
                         console.log(weekThreeTotalCases);                    

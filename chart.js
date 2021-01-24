@@ -16,8 +16,7 @@ for (var i = 1; i < table.rows.length; i++) {
   json.push(rowData);
 }
 
-console.log(json);
-
+console.log(json)
 
 function BuildChart(labels, values, chartTitle) {
   var ctx = document.getElementById("myChart").getContext('2d');
@@ -66,3 +65,4 @@ var values = json.map(function (e) {
 });
 console.log(values); // ["10", "25", "55", "120"]
 
+var chart = BuildChart(labels, values, "Weekly COVID Data by State");

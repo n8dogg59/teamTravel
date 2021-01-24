@@ -1,0 +1,85 @@
+$maincolor: #FCF3CF;
+$bluecolor: #2471A3; 
+$orangecolor: #F5B041;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $maincolor;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+}
+header{
+    width: 100%;
+    height: 60vh;
+    background: linear-gradient(90deg, rgba(196,106,33,1) 0%, rgba(60,87,181,1) 63%);
+    position: relative;
+    .wave{
+        width: 100%;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .navimage{
+        text-align: center;
+        margin-bottom: 50px;
+        img{
+            width: 100%;
+            max-width: 500px; 
+            height: auto;
+        }
+    }
+}
+main{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+    height: 2000px;
+    .from-to{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        color:$orangecolor;
+        h1{
+            width: 50px;
+            font-weight: 500;
+        }
+    }
+    .searchbar{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        div{
+            width: 40%;
+            border: 2px solid $bluecolor;
+            border-radius: 15px;
+            height: 30px;
+            display: flex;
+            background-color: $maincolor;
+            input{
+                width: 90%;
+                border: 0px;
+                border-radius: 15px;
+                height: 26px;
+                background-color: $maincolor;
+                padding: 0 10px;
+            }
+            i{
+                width: 10%;
+                line-height: 30px;
+                color: $bluecolor;
+            }
+        }
+    }
+    .calendar{
+        color: $orangecolor;
+        text-align: center;
+    }
+
+}

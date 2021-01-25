@@ -3,7 +3,13 @@ var weatherKey = config.WEATHER_API_KEY;
 var countyPopKey = config.COUNTY_POP_KEY;
 var city = "Austin"; // we'll get the city name from the html input element
 var county = "";
-var state = "US-TX" // we'll need to get the state name from the html input element
+var stateCountry = "US-TX"; // we'll need to get the state name from the html input element
+var state = "tx"; // we'll need to get the state name from the html input element
+var week1CasesEl = document.querySelector("#week1Cases");
+var week2CasesEl = document.querySelector("#week2Cases");
+var week3CasesEl = document.querySelector("#week3Cases");
+var week4CasesEl = document.querySelector("#week4Cases");
+
 
 $(document).ready(function() {    
     
@@ -41,7 +47,7 @@ $(document).ready(function() {
     // right now.
     
     function countyInfo(countyName, stateName) {
-        fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/US-TX/", {
+        fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/" + stateCountry + "/", {
                 "method": "GET",
                 "headers": {
                     "x-rapidapi-key": virusKey,
@@ -87,37 +93,180 @@ $(document).ready(function() {
     // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
     // fetch and pass it in.
     function totalStateCases() {
-        fetch("https://api.covidtracking.com/v1/states/ca/daily.json")
+        fetch("https://api.covidtracking.com/v1/states/tx/daily.json")
             .then(function(response) {
                 if (response.ok) {
                     return response.json().then(function (response) {
-                        // console.log(response);
+                        console.log(response);
                         var dailyCases = response[1].positiveIncrease;
                         var weekOneTotalCases = 0;
                         var weekTwoTotalCases = 0;
                         var weekThreeTotalCases = 0;
                         var weekFourTotalCases = 0;
                         var weekFiveTotalCases = 0;
+                        var weekOneDeathIncrease = 0;
+                        var weekTwoDeathIncrease = 0;
+                        var weekThreeDeathIncrease = 0;
+                        var weekFourDeathIncrease = 0;
+                        var weekFiveDeathIncrease = 0;
                         for (i = 0; i < 35; i++) {
                             if (i < 7) {
                                 var weekOneTotalCases = weekOneTotalCases + response[i].positiveIncrease;
+                                var weekOneDeathIncrease = weekOneDeathIncrease + response[i].deathIncrease;
                             } else if (i > 6 && i < 14) {
                                 var weekTwoTotalCases = weekTwoTotalCases + response[i].positiveIncrease;
+                                var weekTwoDeathIncrease = weekTwoDeathIncrease + response[i].deathIncrease;
                             } else if (i > 13 && i < 21) {
                                 var weekThreeTotalCases = weekThreeTotalCases + response[i].positiveIncrease;
+                                var weekThreeDeathIncrease = weekThreeDeathIncrease + response[i].deathIncrease;
                             } else if (i > 20 && i < 28) {
                                 var weekFourTotalCases = weekFourTotalCases + response[i].positiveIncrease;
+                                var weekFourDeathIncrease = weekFourDeathIncrease + response[i].deathIncrease;
                             } else if (i > 27 && i < 35) {
                                 var weekFiveTotalCases = weekFiveTotalCases + response[i].positiveIncrease;
+                                var weekFiveDeathIncrease = weekFiveDeathIncrease + response[i].deathIncrease;
                             }
                         }
-                        document.getElementById("week1Cases").innerHTML = weekOneTotalCases;
-                        
+                        document.getElementById("week1Cases").innerHTML = weekOneTotalCases;                        
+                        document.getElementById("week2Cases").innerHTML = weekTwoTotalCases;
+                        document.getElementById("week3Cases").innerHTML = weekThreeTotalCases;
+                        document.getElementById("week4Cases").innerHTML = weekFourTotalCases;
+                        document.getElementById("week5Cases").innerHTML = weekFiveTotalCases;
+                        document.getElementById("week1Deaths").innerHTML = weekOneDeathIncrease;                        
+                        document.getElementById("week2Deaths").innerHTML = weekTwoDeathIncrease;
+                        document.getElementById("week3Deaths").innerHTML = weekThreeDeathIncrease;
+                        document.getElementById("week4Deaths").innerHTML = weekFourDeathIncrease;
+                        document.getElementById("week5Deaths").innerHTML = weekFiveDeathIncrease;
+
+                        console.log(week1CasesEl.textContent);
+                        console.log(week2CasesEl.textContent);
+                        console.log(week3CasesEl.textContent);
+                        console.log(week4CasesEl.textContent);
+
                         console.log(weekOneTotalCases);  
                         console.log(weekTwoTotalCases);                    
                         console.log(weekThreeTotalCases);                    
                         console.log(weekFourTotalCases);                    
-                        console.log(weekFiveTotalCases);                    
+                        console.log(weekFiveTotalCases);
+
+                        console.log(weekOneDeathIncrease);
+                        console.log(weekTwoDeathIncrease);
+                        console.log(weekThreeDeathIncrease);
+                        console.log(weekFourDeathIncrease);
+                        console.log(weekFiveDeathIncrease);
+                        
+                        
+                        var table = document.getElementById('dataTable');
+                        var json = []; // First row needs to be headers 
+                        var headers = [];
+                        for (var i = 0; i < table.rows[0].cells.length; i++) {
+                        headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+                        }
+
+                        // Go through cells 
+                        for (var i = 1; i < table.rows.length; i++) {
+                        var tableRow = table.rows[i];
+                        var rowData = {};
+                        for (var j = 0; j < tableRow.cells.length; j++) {
+                            rowData[headers[j]] = tableRow.cells[j].innerHTML;
+                        }
+                        json.push(rowData);
+                        }
+
+                        console.log(json)
+
+                        function BuildChart(labels, values, chartTitle) {
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                            labels: labels, // Our labels
+                            datasets: [{
+                                label: chartTitle, // Name the series
+                                data: values, // Our values
+                                backgroundColor: [ // Specify custom colors
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [ // Add custom color borders
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1 // Specify bar border width
+                            }]
+                            },
+                            options: {
+                            responsive: true, // Instruct chart js to respond nicely.
+                            maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
+                            }
+                        });
+                        return myChart;
+                        }
+
+                        function BuildChart2(labels, values, chartTitle) {
+                            var ctx = document.getElementById("myChartDeath").getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                labels: labels, // Our labels
+                                datasets: [{
+                                    label: chartTitle, // Name the series
+                                    data: deathValues, // Our values
+                                    backgroundColor: [ // Specify custom colors
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [ // Add custom color borders
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1 // Specify bar border width
+                                }]
+                                },
+                                options: {
+                                responsive: true, // Instruct chart js to respond nicely.
+                                maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
+                                }
+                            });
+                            return myChart;
+                            }
+
+                        // Map JSON values back to label array
+                        var labels = json.map(function (e) {
+                            return e.week;
+                        });
+                        console.log(labels); // ["2016", "2017", "2018", "2019"]
+
+                        // Map JSON values back to values array
+                        var values = json.map(function (e) {
+                            return e.totalnewcases;
+                        });
+                        console.log(values); // ["10", "25", "55", "120"]
+
+                        var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
+
+                        var deathValues = json.map(function (f) {
+                            return f.totalnewdeaths;
+                        });
+
+                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Cases by State");
+         
                     })
                 } else {
                     console.log(response);

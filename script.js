@@ -1,7 +1,6 @@
 var virusKey = config.CORONA_KEY;
 var weatherKey = config.WEATHER_API_KEY;
 var countyPopKey = config.COUNTY_POP_KEY;
-var city = "Austin"; // we'll get the city name from the html input element
 var county = "";
 var stateCountry = "US-TX"; // we'll need to get the state name from the html input element
 var state = "tx"; // we'll need to get the state name from the html input element
@@ -9,13 +8,101 @@ var week1CasesEl = document.querySelector("#week1Cases");
 var week2CasesEl = document.querySelector("#week2Cases");
 var week3CasesEl = document.querySelector("#week3Cases");
 var week4CasesEl = document.querySelector("#week4Cases");
-
+var stateAbbr = "";
+var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
+    {"name": "Alaska","abbreviation": "AK"},
+    {"name": "American Samoa", "abbreviation": "AS"},
+    {"name": "Arizona", "abbreviation": "AZ"},
+    {"name": "Arkansas","abbreviation": "AR"},
+    {"name": "California", "abbreviation": "CA"},
+    {"name": "Colorado", "abbreviation": "CO"},
+    {"name": "Connecticut", "abbreviation": "CT"},
+    {"name": "Delaware", "abbreviation": "DE"},
+    {"name": "District Of Columbia", "abbreviation": "DC"},
+    {"name": "Federated States Of Micronesia", "abbreviation": "FM"},
+    {"name": "Florida","abbreviation": "FL"},
+    {"name": "Georgia", "abbreviation": "GA"},
+    {"name": "Guam", "abbreviation": "GU"},
+    {"name": "Hawaii", "abbreviation": "HI"},
+    {"name": "Idaho", "abbreviation": "ID"},
+    {"name": "Illinois", "abbreviation": "IL"},
+    {"name": "Indiana", "abbreviation": "IN"},
+    {"name": "Iowa", "abbreviation": "IA"},
+    {"name": "Kansas", "abbreviation": "KS"},
+    {"name": "Kentucky", "abbreviation": "KY"},
+    {"name": "Louisiana", "abbreviation": "LA"},
+    {"name": "Maine", "abbreviation": "ME"},
+    {"name": "Marshall Islands", "abbreviation": "MH"},
+    {"name": "Maryland", "abbreviation": "MD"},
+    {"name": "Massachusetts", "abbreviation": "MA"},
+    {"name": "Michigan", "abbreviation": "MI"},
+    {"name": "Minnesota", "abbreviation": "MN"},
+    {"name": "Mississippi", "abbreviation": "MS"},
+    {"name": "Missouri", "abbreviation": "MO"},
+    {"name": "Montana", "abbreviation": "MT"},
+    {"name": "Nebraska", "abbreviation": "NE"},
+    {"name": "Nevada", "abbreviation": "NV"},
+    {"name": "New Hampshire", "abbreviation": "NH"},
+    {"name": "New Jersey", "abbreviation": "NJ"},
+    {"name": "New Mexico", "abbreviation": "NM"},
+    {"name": "New York", "abbreviation": "NY"},
+    {"name": "North Carolina", "abbreviation": "NC"},
+    {"name": "North Dakota", "abbreviation": "ND"},
+    {"name": "Northern Mariana Islands", "abbreviation": "MP"},
+    {"name": "Ohio", "abbreviation": "OH"},
+    {"name": "Oklahoma", "abbreviation": "OK"},
+    {"name": "Oregon", "abbreviation": "OR"},
+    {"name": "Palau", "abbreviation": "PW"},
+    {"name": "Pennsylvania", "abbreviation": "PA"},
+    {"name": "Puerto Rico", "abbreviation": "PR"},
+    {"name": "Rhode Island", "abbreviation": "RI"},
+    {"name": "South Carolina", "abbreviation": "SC"},
+    {"name": "South Dakota", "abbreviation": "SD"},
+    {"name": "Tennessee", "abbreviation": "TN"},
+    {"name": "Texas", "abbreviation": "TX"},
+    {"name": "Utah", "abbreviation": "UT"},
+    {"name": "Vermont", "abbreviation": "VT"},
+    {"name": "Virgin Islands", "abbreviation": "VI"},
+    {"name": "Virginia", "abbreviation": "VA"},
+    {"name": "Washington", "abbreviation": "WA"},
+    {"name": "West Virginia", "abbreviation": "WV"},
+    {"name": "Wisconsin", "abbreviation": "WI"},
+    {"name": "Wyoming", "abbreviation": "WY"}]
 
 $(document).ready(function() {    
     
+    function getCityState() {
+        // This function will get the city and state from the airport code the user inputs
+        fetch("https://airport-info.p.rapidapi.com/airport?iata=AUS", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "d0d36869f4msh08f660e28e5060bp1aef27jsncfbd043899ea",
+                "x-rapidapi-host": "airport-info.p.rapidapi.com"
+            }
+        })
+            .then(response => {
+                return response.json().then(function (response) {
+                    var searchedCity = response.city;
+                    var searchedState = response.state;
+                    console.log(response);
+                    console.log(cityStateArr);
+                    for (i = 0; i < cityStateArr.length; i++) {
+                        if (cityStateArr[i].name === searchedState) {
+                            stateAbbr = cityStateArr[i].abbreviation;
+                            console.log(stateAbbr);
+                        }
+                    }
+                    getCounty(searchedCity, stateAbbr);
+                    totalStateCases(stateAbbr);
+                })
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
     // This function gets the county from the city by getting the longitude and latitude of the city first then finding the county.
-    function getCounty() {
-        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + weatherKey + "&units=imperial")
+    function getCounty(searchedCity) {
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchedCity + weatherKey + "&units=imperial")
             .then(function(response) {
                 if (response.ok) {
                     return response.json().then(function (response) {
@@ -31,7 +118,8 @@ $(document).ready(function() {
                                         console.log(response.County.name);
                                         var countyName = response.County.name;
                                         var stateName = response.State.name;
-                                        countyInfo(countyName, stateName);
+                                        console.log(stateAbbr);
+                                        countyInfo(countyName, stateName, stateAbbr);
                                     })
                                 } else {
                                     console.log(response);
@@ -46,8 +134,8 @@ $(document).ready(function() {
     //just the total recent cases.  We still need to figure out how to pass the county into this function because it's manually entered
     // right now.
     
-    function countyInfo(countyName, stateName) {
-        fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/" + stateCountry + "/", {
+    function countyInfo(countyName, stateName, stateAbbr) {
+        fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/US-" + stateAbbr + "/", {
                 "method": "GET",
                 "headers": {
                     "x-rapidapi-key": virusKey,
@@ -92,8 +180,8 @@ $(document).ready(function() {
     // This function gets the total new cases for each week.  The state data is manually added to the fetch but we should be able
     // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
     // fetch and pass it in.
-    function totalStateCases() {
-        fetch("https://api.covidtracking.com/v1/states/tx/daily.json")
+    function totalStateCases(stateAbbr) {
+        fetch("https://api.covidtracking.com/v1/states/" + stateAbbr + "/daily.json")
             .then(function(response) {
                 if (response.ok) {
                     return response.json().then(function (response) {
@@ -259,13 +347,13 @@ $(document).ready(function() {
                         });
                         console.log(values); // ["10", "25", "55", "120"]
 
-                        var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
+                        var chart = BuildChart(labels, values, "Weekly COVID Cases for by State");
 
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });
 
-                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Cases by State");
+                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths by State");
          
                     })
                 } else {
@@ -273,6 +361,5 @@ $(document).ready(function() {
                 }
             })   
         }
-    getCounty(); 
-    totalStateCases();
+    getCityState();
 })

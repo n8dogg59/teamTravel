@@ -2,12 +2,13 @@ var virusKey = config.CORONA_KEY;
 var weatherKey = config.WEATHER_API_KEY;
 var countyPopKey = config.COUNTY_POP_KEY;
 var county = "";
-var stateCountry = "US-TX"; // we'll need to get the state name from the html input element
 var week1CasesEl = document.querySelector("#week1Cases");
 var week2CasesEl = document.querySelector("#week2Cases");
 var week3CasesEl = document.querySelector("#week3Cases");
 var week4CasesEl = document.querySelector("#week4Cases");
 var stateAbbr = "";
+// var searchButton = document.getElementById("");  Need to get the button id for the search button
+// var searchAirportEl = document.querySelector("");  Need to get the input id for destination city
 var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "Alaska","abbreviation": "AK"},
     {"name": "American Samoa", "abbreviation": "AS"},
@@ -71,8 +72,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
 $(document).ready(function() {    
     
     function getCityState() {
+        // var airportCode = searchAirportEl.value.trim();  
         // This function will get the city and state from the airport code the user inputs
-        fetch("https://airport-info.p.rapidapi.com/airport?iata=AUS", {
+        fetch("https://airport-info.p.rapidapi.com/airport?iata=AUS", { // add the "airportCode" variable into fetch
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "d0d36869f4msh08f660e28e5060bp1aef27jsncfbd043899ea",
@@ -83,12 +85,9 @@ $(document).ready(function() {
                 return response.json().then(function (response) {
                     var searchedCity = response.city;
                     var searchedState = response.state;
-                    console.log(response);
-                    console.log(cityStateArr);
                     for (i = 0; i < cityStateArr.length; i++) {
                         if (cityStateArr[i].name === searchedState) {
                             stateAbbr = cityStateArr[i].abbreviation;
-                            console.log(stateAbbr);
                         }
                     }
                     getCounty(searchedCity, stateAbbr);
@@ -114,10 +113,8 @@ $(document).ready(function() {
                                 if (response.ok) {
                                     return response.json().then(function (response) {
                                         // console.log(response);
-                                        console.log(response.County.name);
                                         var countyName = response.County.name;
                                         var stateName = response.State.name;
-                                        console.log(stateAbbr);
                                         countyInfo(countyName, stateName, stateAbbr);
                                     })
                                 } else {
@@ -150,6 +147,9 @@ $(document).ready(function() {
                             if (countyLength[i].location.county === countyName) {
                                 console.log("Total Confirmed Cases in " + countyName + " County = " + countyLength[i].totalConfirmedCases);
                                 console.log("Total Deaths in " + countyName + " County = " + countyLength[i].totalDeaths);
+                                var countyDeaths = countyLength[i].totalDeaths;
+                                var countyCases = countyLength[i].totalConfirmedCases;
+                                countyPopulation(countyName, stateName, countyCases, countyDeaths);
                             }
                         }
                     })
@@ -157,25 +157,29 @@ $(document).ready(function() {
                 .catch(err => {
                     console.error(err);
                 });
-
-        fetch("https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=county:*&key=" + countyPopKey)
-            .then(function(response) {
-                if (response.ok) {
-                    return response.json().then(function (response) {
-                        var totalCounties = response;
-                        // console.log(totalCounties);
-                        for (i = 0; i < totalCounties.length; i++) {
-                            if (totalCounties[i][0] === countyName + " County, " + stateName) {
-                                var countyPopulation = totalCounties[i][1];
-                                console.log(countyPopulation);
-                                console.log("Population of " + countyName + " County = " + countyPopulation);
-                            }
-                        }
-                    })
-                }
-
-            })
     }            
+        
+    function countyPopulation(countyName, stateName, countyCases, countyDeaths) {
+        fetch("https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=county:*&key=" + countyPopKey)
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json().then(function (response) {
+                            var totalCounties = response;
+                            // console.log(totalCounties);
+                            for (i = 0; i < totalCounties.length; i++) {
+                                if (totalCounties[i][0] === countyName + " County, " + stateName) {
+                                    var countyPopulation = totalCounties[i][1];
+                                    console.log("Population of " + countyName + " County = " + countyPopulation);
+                                }
+                            }
+                            percentInfected = (countyCases / countyPopulation) * 100;
+                            displayPercent = percentInfected.toFixed(2);
+                            // document.getElementById("".innerHTML) = displayPercent + "%";
+                        })
+                    }
+
+                })
+    }                
 
     // This function gets the total new cases for each week.  The state data is manually added to the fetch but we should be able
     // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
@@ -226,24 +230,6 @@ $(document).ready(function() {
                         document.getElementById("week4Deaths").innerHTML = weekFourDeathIncrease;
                         document.getElementById("week5Deaths").innerHTML = weekFiveDeathIncrease;
 
-                        console.log(week1CasesEl.textContent);
-                        console.log(week2CasesEl.textContent);
-                        console.log(week3CasesEl.textContent);
-                        console.log(week4CasesEl.textContent);
-
-                        console.log(weekOneTotalCases);  
-                        console.log(weekTwoTotalCases);                    
-                        console.log(weekThreeTotalCases);                    
-                        console.log(weekFourTotalCases);                    
-                        console.log(weekFiveTotalCases);
-
-                        console.log(weekOneDeathIncrease);
-                        console.log(weekTwoDeathIncrease);
-                        console.log(weekThreeDeathIncrease);
-                        console.log(weekFourDeathIncrease);
-                        console.log(weekFiveDeathIncrease);
-                        
-                        
                         var table = document.getElementById('dataTable');
                         var json = []; // First row needs to be headers 
                         var headers = [];
@@ -361,5 +347,6 @@ $(document).ready(function() {
                 }
             })   
         }
+    // searchButton.addEventListener("click", getCityState);
     getCityState();
 })

@@ -1,18 +1,18 @@
 # SafeFlight 
- ![image](https://user-images.githubusercontent.com/74440415/103102021-cfb98e80-45df-11eb-8d0e-70dd650917c1.png)
+![image](https://user-images.githubusercontent.com/74440415/105785589-e0dc1f00-5f40-11eb-8133-e93fb1135565.png)
+
  ## Purpose 
-Create a web portfolio to share a little about myself, and to showcase web development skills. 
+Produce an interactive website that allows user to search for flight data, while simultaneously presenting COVID data per the location searched. 
 
 ## Link 
-https://nsherman113.github.io/web-portfolio/
+TBD
 
-## Sections:
+## Functions:
 
-### About me
-Presents a short explanation with interests for the viewer to learn about myself upon entering the web page. 
+### Search 
+User types in airport information to generate flight info, such as dates, times, and pricing. 
 
-### Work 
-Provides a detailed description with all skills and programs learned, and pictures // examples to follow. 
+### COVID Data
+Presents a graph with COVID case information by county. 
 
-### Contact 
-Provides contact information for viewer or employer, with link to professional websites (i.e. email, phone, Github, Linkedin, etc).
+

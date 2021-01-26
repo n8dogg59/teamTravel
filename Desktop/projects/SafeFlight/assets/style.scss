@@ -14,8 +14,8 @@ $pinkcolor: #f75f98;
 
 body{
     background-color: $maincolor;
-    font-family: 'Alegreya Sans SC', sans-serif;
     font-family: 'Montserrat', sans-serif;
+
 }
 header{
     width: 100%;
@@ -43,7 +43,6 @@ main{
     width: 100%;
     margin: 0 auto;
     max-width: 900px;
-    height: 2000px;
     .from-to{
         width: 100%;
         display: flex;
@@ -85,29 +84,51 @@ main{
         color: $orangecolor;
         text-align: center;
     }
-    .results{
-        text-align: center;
-        color: $orangecolor;
-        margin-bottom: 30px;
-        font-weight: 500;
-        width: 100%;
+    .results-wrap{
+        .result-button{
+            width: 140px;
+            height: 40px;
+            text-align: center;
+            margin: 0 auto;
+            .results-p{
+                color: $darkbluecolor;
+                background-color: $darkorangecolor;
+                font-weight: 500;
+                width: 100%;
+                height: 100%;
+                line-height: 38px;
+                border: 2px solid $darkorangecolor;
+                cursor: pointer;
+            }
+            .results-p:hover{
+                color: $darkorangecolor;
+                background-color: $darkbluecolor;
+            }
+        }
+        .resultbox-wrap{
+            margin-top:40px ;
+            .resultbox {
+                max-width: $grid__bp-md * 1px;
+                margin: 0 auto;
+                border: 2px solid $bluecolor;
+                height: 60px;
+                margin-bottom: 50px;
+                cursor: pointer;
+                border-radius: 15px;
         
-
+            }  
+            .resultbox:hover {
+                border: 3px;
+                color:$darkbluecolor;
+                background:$orangecolor;
+            }
+        }
     }
-    .resultbox {
-        max-width: $grid__bp-md * 1px;
-        margin: 0 auto;
-        border: 2px solid $bluecolor;
-        height: 60px;
-        margin-bottom: 50px;
-        cursor: pointer;
-        border-radius: 15px;
-
-    }  
-    .resultbox:hover {
-        border: 3px;
-        color:$darkbluecolor;
-        background:$orangecolor;
+    .position-right{
+        position: absolute;
+        right: 30px;
+        top: 65vh;
+        max-width: 200px;
     }
     #slider {
         margin: 0 auto;
@@ -170,23 +191,38 @@ main{
           justify-content: center;
           align-items: center;
           height: 100%;
-          color: #fff;
         }
       
         .slide_1 {
-          background: $darkorangecolor;
+            background-image: url(../assets/travel5.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
         }
       
         .slide_2 {
-          background: $darkbluecolor;
+            background-image: url(../assets/travel6.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
         }
       
         .slide_3 {
-          background: $darkorangecolor;
+            background-image: url(../assets/travel1.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
         }
       
         .slide_4 {
-          background: $darkbluecolor;
+            background-image: url(../assets/travel2.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
         }
     }
       
@@ -256,8 +292,37 @@ main{
         color: $orangecolor;
         text-align: center;
         margin-top: 150px;
-        margin-bottom: 200px;
+        margin-bottom: 80px;
     }  
 
     
+}
+
+.footer{
+    background-color: #FFDD57 !important;
+}
+
+.about-tiles{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: fit-content;
+    margin: 200px 0 40px 0;
+    p{
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        color: $darkorangecolor;
+    }
+    .tile{
+        min-width: 220px;
+        max-width: 220px;
+    }
+}
+
+.dummy-chart{
+    width: 100%;
+    height: 500px;
+    background-color: $pinkcolor;
 }

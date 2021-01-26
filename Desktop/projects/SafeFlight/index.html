@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;300;400;500&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
-    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <title>Safe Flight</title>
 </head>
 <body>
@@ -53,16 +53,34 @@
                 <i class="fas fa-search"></i>
             </div>
         </div>
+        <!--SideBar-->
+        <div class="tile is-parent position-right">
+            <article class="tile is-child notification is-warning">
+              <div class="content">
+                <p class="title">How it Works</p>
+                <p class="subtitle">What we do </p>
+                <div class="content">
+                    We gather the best prices for air travel also giving updates on COVID-19 stats. Enter the destination and date and hit get results!
+                </div>
+              </div>
+            </article>
+          </div>
         <!--Results-->
-        <p class="results">Results</p>
-        <div class="resultbox">
-            <p></p>
-        </div>
-        <div class="resultbox">
-            <p></p>
-        </div>
-        <div class="resultbox">
-            <p></p>
+        <div class="results-wrap">
+            <div class="result-button">
+                <p class="results-p"> Get Results</p>
+            </div>
+            <div class="resultbox-wrap">
+                <div class="resultbox">
+                    <p></p>
+                </div>
+                <div class="resultbox">
+                    <p></p>
+                </div>
+                <div class="resultbox">
+                    <p></p>
+                </div>
+            </div>
         </div>
         <!--slider-->
         <div id="slider">
@@ -74,25 +92,21 @@
                <div id="overflow">
                   <div class="inner">
                      <div class="slide slide_1">
-                        <div class="slide-content">
-                           <h2>Result 1</h2>
-                           <p></p>
+                        <div class="slide-content cdc-img">
                         </div>
                      </div>
                      <div class="slide slide_2">
-                        <div class="slide-content">
-                           <h2>Result 2</h2>
-                           <p></p>
+                        <div class="slide-content cdc-img">
                         </div>
                      </div>
                      <div class="slide slide_3">
-                        <div class="slide-content">
+                        <div class="slide-content cdc-img">
                            <h2>Result 3</h2>
                            <p></p>
                         </div>
                      </div>
                      <div class="slide slide_4">
-                        <div class="slide-content">
+                        <div class="slide-content cdc-img">
                            <h2>Result 4</h2>
                            <p></p>
                         </div>
@@ -117,6 +131,48 @@
          <div class="virus animate__animated animate__heartBeat">
            <p><i class="fas fa-viruses fa-3x"></i></p>
         </div>
+        <!--CHART GOES HERE-->
+        <div class="dummy-chart"></div>
+        <div class="about-tiles">
+            <p>Developed By</p>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Jose Ramirez</p>
+                  <p class="subtitle">Front End</p>
+                  <figure class="image is-4by3">
+                    <img src=".//assets/joseramirez.jpg">
+                  </figure>
+                </article>
+            </div>
+        </div>
+
     </main>
     <footer class="footer">
         <div class="content has-text-centered">
@@ -125,7 +181,8 @@
           </p>
         </div>
     </footer>
-    <script src=".assets/config.js"></script>
+    <script src="./assets/config.js"></script>
     <script src="./assets/script.js"></script>
+
 </body>
 </html>

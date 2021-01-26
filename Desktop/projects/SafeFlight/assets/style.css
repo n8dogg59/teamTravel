@@ -7,7 +7,6 @@
 
 body {
   background-color: #FCF3CF;
-  font-family: 'Alegreya Sans SC', sans-serif;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -42,7 +41,6 @@ main {
   width: 100%;
   margin: 0 auto;
   max-width: 900px;
-  height: 2000px;
 }
 
 main .from-to {
@@ -103,15 +101,34 @@ main .calendar {
   text-align: center;
 }
 
-main .results {
+main .results-wrap .result-button {
+  width: 140px;
+  height: 40px;
   text-align: center;
-  color: #F5B041;
-  margin-bottom: 30px;
-  font-weight: 500;
-  width: 100%;
+  margin: 0 auto;
 }
 
-main .resultbox {
+main .results-wrap .result-button .results-p {
+  color: #003459;
+  background-color: #c46a21;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  line-height: 38px;
+  border: 2px solid #c46a21;
+  cursor: pointer;
+}
+
+main .results-wrap .result-button .results-p:hover {
+  color: #c46a21;
+  background-color: #003459;
+}
+
+main .results-wrap .resultbox-wrap {
+  margin-top: 40px;
+}
+
+main .results-wrap .resultbox-wrap .resultbox {
   max-width: 768px;
   margin: 0 auto;
   border: 2px solid #2471A3;
@@ -121,10 +138,17 @@ main .resultbox {
   border-radius: 15px;
 }
 
-main .resultbox:hover {
+main .results-wrap .resultbox-wrap .resultbox:hover {
   border: 3px;
   color: #003459;
   background: #F5B041;
+}
+
+main .position-right {
+  position: absolute;
+  right: 30px;
+  top: 65vh;
+  max-width: 200px;
 }
 
 main #slider {
@@ -194,23 +218,38 @@ main #slides .slide {
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
-  color: #fff;
 }
 
 main #slides .slide_1 {
-  background: #c46a21;
+  background-image: url(../assets/travel5.jpg) !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #003459;
 }
 
 main #slides .slide_2 {
-  background: #003459;
+  background-image: url(../assets/travel6.jpg) !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #003459;
 }
 
 main #slides .slide_3 {
-  background: #c46a21;
+  background-image: url(../assets/travel1.jpg) !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #003459;
 }
 
 main #slides .slide_4 {
-  background: #003459;
+  background-image: url(../assets/travel2.jpg) !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #003459;
 }
 
 main #controls {
@@ -280,6 +319,43 @@ main .virus {
   color: #F5B041;
   text-align: center;
   margin-top: 150px;
-  margin-bottom: 200px;
+  margin-bottom: 80px;
+}
+
+.footer {
+  background-color: #FFDD57 !important;
+}
+
+.about-tiles {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 200px 0 40px 0;
+}
+
+.about-tiles p {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #c46a21;
+}
+
+.about-tiles .tile {
+  min-width: 220px;
+  max-width: 220px;
+}
+
+.dummy-chart {
+  width: 100%;
+  height: 500px;
+  background-color: #f75f98;
 }
 /*# sourceMappingURL=style.css.map */

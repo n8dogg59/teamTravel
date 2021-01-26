@@ -152,8 +152,6 @@
 // });
 // console.log(labels); // ["2016", "2017", "2018", "2019"]
 
-<<<<<<< HEAD
-=======
 // function BuildChart(labels, values, chartTitle) {
 //   var ctx = document.getElementById("myChart").getContext('2d');
 //   var myChart = new Chart(ctx, {
@@ -195,13 +193,10 @@
 // });
 // console.log(labels); // ["2016", "2017", "2018", "2019"]
 
->>>>>>> 567da88b5641f385a21ddb0bf608ab2e06e5afa4
 // // Map JSON values back to values array
 // var values = json.map(function (e) {
 //   return e.totalcases;
 // });
-<<<<<<< HEAD
-=======
 // console.log(values); // ["10", "25", "55", "120"]
 //   // Map JSON values back to label array
 //   var labels = json.map(function (e) {
@@ -213,7 +208,6 @@
 //   var values = json.map(function (e) {
 //     return e.totalnewcases;
 //   });
->>>>>>> 567da88b5641f385a21ddb0bf608ab2e06e5afa4
 // console.log(values); // ["10", "25", "55", "120"]
 
 // var chart = BuildChart(labels, values, "Weekly COVID Data by State");

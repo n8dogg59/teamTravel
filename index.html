@@ -9,40 +9,43 @@
     <table class="table" id="dataTable">
         <thead>
           <th>Week</th>
-          <th>Total Cases</th>
-          <th>Total Deaths</th>
-          <th>Profit ($)</th>
+          <th>Total New Cases</th>
+          <th>Total New Deaths</th>
         </thead>
         <tbody>
           <tr>
-            <td>Week 1</td>
-            <td>10</td>
-            <td>200</td>
-            <td>89</td>
+            <td>Last 7 Days</td>
+            <td id="week1Cases">10</td>
+            <td id="week1Deaths">1200</td>
           </tr>
           <tr>
-            <td>Week 2</td>
-            <td>25</td>
-            <td>550</td>
-            <td>225</td>
+            <td>8-14 Days Ago</td>
+            <td id="week2Cases">10</td>
+            <td id="week2Deaths">1200</td>            
           </tr>
           <tr>
-            <td>Week 3</td>
-            <td>55</td>
-            <td>1200</td>
-            <td>600</td>
+            <td>15-21 Days Ago</td>
+            <td id="week3Cases">10</td>
+            <td id="week3Deaths">1200</td>
           </tr>
           <tr>
-            <td>Week 4</td>
-            <td>45</td>
-            <td>2450</td>
-            <td>1100</td>
+            <td>22-28 Days Ago</td>
+            <td id="week4Cases">10</td>
+            <td id="week4Deaths">1200</td>
+          </tr>
+          <tr>
+            <td>29-35 Days Ago</td>
+            <td id="week5Cases">10</td>
+            <td id="week5Deaths">1200</td>
           </tr>
         </tbody>
       </table>
       
       <div class="chart">
         <canvas id="myChart"></canvas>
+      </div>
+      <div class="chart">
+        <canvas id="myChartDeath"></canvas>
       </div>
       
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>

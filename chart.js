@@ -21,7 +21,7 @@ console.log(json)
 function BuildChart(labels, values, chartTitle) {
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: labels, // Our labels
       datasets: [{
@@ -61,7 +61,7 @@ console.log(labels); // ["2016", "2017", "2018", "2019"]
 
 // Map JSON values back to values array
 var values = json.map(function (e) {
-  return e.itemssold;
+  return e.totalcases;
 });
 console.log(values); // ["10", "25", "55", "120"]
 

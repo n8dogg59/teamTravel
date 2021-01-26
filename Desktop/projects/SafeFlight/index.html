@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;300;400;500&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+    
     <title>Safe Flight</title>
 </head>
 <body>
@@ -29,11 +31,11 @@
         <!--Search tab-->
         <div class="searchbar">
             <div>
-                <input type="text" placeholder="Enter Destination">
+                <input type="text" placeholder="Enter Destination (Ex: JFK)">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input type="text" placeholder="Enter Destination">
+                <input type="text" placeholder="Enter Destination (Ex: JFK)">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -43,18 +45,86 @@
 
         <div class="searchbar">
             <div>
-                <input type="text" placeholder="Enter Date">
+                <input type="text" placeholder="Enter Date (MM/DD/YYYY)">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input type="text" placeholder="Enter Date">
+                <input type="text" placeholder="Enter Date (MM/DD/YYYY)">
                 <i class="fas fa-search"></i>
             </div>
         </div>
-        
+        <!--Results-->
+        <p class="results">Results</p>
+        <div class="resultbox">
+            <p></p>
+        </div>
+        <div class="resultbox">
+            <p></p>
+        </div>
+        <div class="resultbox">
+            <p></p>
+        </div>
+        <!--slider-->
+        <div id="slider">
+            <input type="radio" name="slider" id="slide1" checked>
+            <input type="radio" name="slider" id="slide2">
+            <input type="radio" name="slider" id="slide3">
+            <input type="radio" name="slider" id="slide4">
+            <div id="slides">
+               <div id="overflow">
+                  <div class="inner">
+                     <div class="slide slide_1">
+                        <div class="slide-content">
+                           <h2>Result 1</h2>
+                           <p></p>
+                        </div>
+                     </div>
+                     <div class="slide slide_2">
+                        <div class="slide-content">
+                           <h2>Result 2</h2>
+                           <p></p>
+                        </div>
+                     </div>
+                     <div class="slide slide_3">
+                        <div class="slide-content">
+                           <h2>Result 3</h2>
+                           <p></p>
+                        </div>
+                     </div>
+                     <div class="slide slide_4">
+                        <div class="slide-content">
+                           <h2>Result 4</h2>
+                           <p></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="controls">
+               <label for="slide1"></label>
+               <label for="slide2"></label>
+               <label for="slide3"></label>
+               <label for="slide4"></label>
+            </div>
+            <div id="bullets">
+               <label for="slide1"></label>
+               <label for="slide2"></label>
+               <label for="slide3"></label>
+               <label for="slide4"></label>
+            </div>
+         </div>
+         <!--Virus-->
+         <div class="virus animate__animated animate__heartBeat">
+           <p><i class="fas fa-viruses fa-3x"></i></p>
+        </div>
     </main>
-    
-
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma  & SCSS </strong> by Group 6 UT Coding Bootcamp.
+          </p>
+        </div>
+    </footer>
     <script src=".assets/config.js"></script>
     <script src="./assets/script.js"></script>
 </body>

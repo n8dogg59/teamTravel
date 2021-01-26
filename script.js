@@ -3,7 +3,6 @@ var weatherKey = config.WEATHER_API_KEY;
 var countyPopKey = config.COUNTY_POP_KEY;
 var county = "";
 var stateCountry = "US-TX"; // we'll need to get the state name from the html input element
-var state = "tx"; // we'll need to get the state name from the html input element
 var week1CasesEl = document.querySelector("#week1Cases");
 var week2CasesEl = document.querySelector("#week2Cases");
 var week3CasesEl = document.querySelector("#week3Cases");
@@ -131,7 +130,7 @@ $(document).ready(function() {
     }    
     
     // This function get the total confirmed cases for the county.  It's the total overall cases from the start of the pandemic and not
-    //just the total recent cases.  We still need to figure out how to pass the county into this function because it's manually entered
+    // just the total recent cases.  We still need to figure out how to pass the county into this function because it's manually entered
     // right now.
     
     function countyInfo(countyName, stateName, stateAbbr) {
@@ -168,6 +167,7 @@ $(document).ready(function() {
                         for (i = 0; i < totalCounties.length; i++) {
                             if (totalCounties[i][0] === countyName + " County, " + stateName) {
                                 var countyPopulation = totalCounties[i][1];
+                                console.log(countyPopulation);
                                 console.log("Population of " + countyName + " County = " + countyPopulation);
                             }
                         }
@@ -347,7 +347,7 @@ $(document).ready(function() {
                         });
                         console.log(values); // ["10", "25", "55", "120"]
 
-                        var chart = BuildChart(labels, values, "Weekly COVID Cases for by State");
+                        var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
 
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;

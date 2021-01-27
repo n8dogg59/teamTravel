@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table" id="dataTable">
+        <thead>
+          <th>Week</th>
+          <th>Total New Cases</th>
+          <th>Total New Deaths</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Last 7 Days</td>
+            <td id="week1Cases">10</td>
+            <td id="week1Deaths">1200</td>
+          </tr>
+          <tr>
+            <td>8-14 Days Ago</td>
+            <td id="week2Cases">10</td>
+            <td id="week2Deaths">1200</td>            
+          </tr>
+          <tr>
+            <td>15-21 Days Ago</td>
+            <td id="week3Cases">10</td>
+            <td id="week3Deaths">1200</td>
+          </tr>
+          <tr>
+            <td>22-28 Days Ago</td>
+            <td id="week4Cases">10</td>
+            <td id="week4Deaths">1200</td>
+          </tr>
+          <tr>
+            <td>29-35 Days Ago</td>
+            <td id="week5Cases">10</td>
+            <td id="week5Deaths">1200</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="chart">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="chart">
+        <canvas id="myChartDeath"></canvas>
+      </div>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="chart.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+$maincolor: #FCF3CF;
+$bluecolor: #2471A3; 
+$orangecolor: #F5B041;
+$grid__bp-md: 768;
+$darkorangecolor: #c46a21;
+$darkbluecolor:  #003459; 
+$pinkcolor: #f75f98;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $maincolor;
+    font-family: 'Montserrat', sans-serif;
+
+}
+header{
+    width: 100%;
+    height: 60vh;
+    background: linear-gradient(90deg, rgba(196,106,33,1) 0%, rgba(60,87,181,1) 63%);
+    position: relative;
+    .wave{
+        width: 100%;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .navimage{
+        text-align: center;
+        margin-bottom: 50px;
+        img{
+            width: 100%;
+            max-width: 500px; 
+            height: auto;
+        }
+    }
+}
+main{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+    .from-to{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        color:$orangecolor;
+        h1{
+            width: 50px;
+            font-weight: 500;
+        }
+    }
+    .searchbar{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        div{
+            width: 40%;
+            border: 2px solid $bluecolor;
+            border-radius: 15px;
+            height: 30px;
+            display: flex;
+            background-color: $maincolor;
+            input{
+                width: 90%;
+                border: 0px;
+                border-radius: 15px;
+                height: 26px;
+                background-color: $maincolor;
+                padding: 0 10px;
+            }
+            i{
+                width: 10%;
+                line-height: 30px;
+                color: $bluecolor;
+            }
+        }
+    }
+    .calendar{
+        color: $orangecolor;
+        text-align: center;
+    }
+    .results-wrap{
+        .result-button{
+            width: 140px;
+            height: 40px;
+            text-align: center;
+            margin: 0 auto;
+            .results-p{
+                color: $darkbluecolor;
+                background-color: $darkorangecolor;
+                font-weight: 500;
+                width: 100%;
+                height: 100%;
+                line-height: 38px;
+                border: 2px solid $darkorangecolor;
+                cursor: pointer;
+            }
+            .results-p:hover{
+                color: $darkorangecolor;
+                background-color: $darkbluecolor;
+            }
+        }
+        .resultbox-wrap{
+            margin-top:40px ;
+            .resultbox {
+                max-width: $grid__bp-md * 1px;
+                margin: 0 auto;
+                border: 2px solid $bluecolor;
+                height: 60px;
+                margin-bottom: 50px;
+                cursor: pointer;
+                border-radius: 15px;
+        
+            }  
+            .resultbox:hover {
+                border: 3px;
+                color:$darkbluecolor;
+                background:$orangecolor;
+            }
+        }
+    }
+    .position-right{
+        position: absolute;
+        right: 30px;
+        top: 65vh;
+        max-width: 200px;
+    }
+    #slider {
+        margin: 0 auto;
+        width: 800px;
+        max-width: 100%;
+        text-align: center;
+        margin-top: 100px;
+      
+        input[type=radio] {
+          display: none;
+        }
+      
+        label {
+          cursor: pointer;
+          text-decoration: none;
+        }
+    }
+      
+    #slides {
+        padding: 10px;
+        border: 3px solid #ccc;
+        background: #fff;
+        position: relative;
+        z-index: 1;
+        }
+      
+    #overflow {
+        width: 100%;
+        overflow: hidden;
+        }
+      
+      #slide1:checked ~ #slides .inner {
+        margin-left: 0;
+        }
+      
+      #slide2:checked ~ #slides .inner {
+        margin-left: -100%;
+        }
+      
+      #slide3:checked ~ #slides .inner {
+        margin-left: -200%;
+        }
+      
+      #slide4:checked ~ #slides .inner {
+        margin-left: -300%;
+        }
+      
+    #slides {
+        .inner {
+          transition: margin-left 800ms cubic-bezier(0.77, 0, 0.175, 1);
+          width: 400%;
+          line-height: 0;
+          height: 300px;
+        }
+      
+        .slide {
+          width: 25%;
+          float: left;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+        }
+      
+        .slide_1 {
+            background-image: url(../assets/travel5.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
+        }
+      
+        .slide_2 {
+            background-image: url(../assets/travel6.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
+        }
+      
+        .slide_3 {
+            background-image: url(../assets/travel1.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
+        }
+      
+        .slide_4 {
+            background-image: url(../assets/travel2.jpg) !important;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: $darkbluecolor;
+        }
+    }
+      
+    #controls {
+        margin: -180px 0 0 0;
+        width: 100%;
+        height: 50px;
+        z-index: 3;
+        position: relative;
+      
+        label {
+          transition: opacity 0.2s ease-out;
+          display: none;
+          width: 50px;
+          height: 50px;
+          opacity: .4;
+      
+          &:hover {
+            opacity: 1;
+          }
+        }
+    }
+      
+    #slide1:checked ~ #controls label:nth-child(2), #slide2:checked ~ #controls label:nth-child(3), #slide3:checked ~ #controls label:nth-child(4), #slide4:checked ~ #controls label:nth-child(1) {
+        background: url(https://image.flaticon.com/icons/svg/130/130884.svg) no-repeat;
+        float: right;
+        margin: 0 -50px 0 0;
+        display: block;
+      }
+      
+      #slide1:checked ~ #controls label:nth-last-child(2), #slide2:checked ~ #controls label:nth-last-child(3), #slide3:checked ~ #controls label:nth-last-child(4), #slide4:checked ~ #controls label:nth-last-child(1) {
+        background: url(https://image.flaticon.com/icons/svg/130/130882.svg) no-repeat;
+        float: left;
+        margin: 0 0 0 -50px;
+        display: block;
+      }
+      
+      #bullets {
+        margin: 150px 0 0;
+        text-align: center;
+      
+        label {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          border-radius: 100%;
+          background: #ccc;
+          margin: 0 10px;
+        }
+      }
+      
+      #slide1:checked ~ #bullets label:nth-child(1), #slide2:checked ~ #bullets label:nth-child(2), #slide3:checked ~ #bullets label:nth-child(3), #slide4:checked ~ #bullets label:nth-child(4) {
+        background: #444;
+      }
+      
+      @media screen and (max-width: 900px) {
+        #slide1:checked ~ #controls label:nth-child(2), #slide2:checked ~ #controls label:nth-child(3), #slide3:checked ~ #controls label:nth-child(4), #slide4:checked ~ #controls label:nth-child(1), #slide1:checked ~ #controls label:nth-last-child(2), #slide2:checked ~ #controls label:nth-last-child(3), #slide3:checked ~ #controls label:nth-last-child(4), #slide4:checked ~ #controls label:nth-last-child(1) {
+          margin: 0;
+        }
+      
+        #slides {
+          max-width: calc(100% - 140px);
+          margin: 0 auto;
+        }
+      } 
+    .virus{
+        color: $orangecolor;
+        text-align: center;
+        margin-top: 150px;
+        margin-bottom: 80px;
+    }  
+
+    
+}
+
+.footer{
+    background-color: #FFDD57 !important;
+}
+
+.about-tiles{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: fit-content;
+    margin: 200px 0 40px 0;
+    p{
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        color: $darkorangecolor;
+    }
+    .tile{
+        min-width: 220px;
+        max-width: 220px;
+    }
+}
+
+.dummy-chart{
+    width: 100%;
+    height: 500px;
+    background-color: $darkorangecolor;
+}

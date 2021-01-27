@@ -31,11 +31,11 @@
         <!--Search tab-->
         <div class="searchbar">
             <div>
-                <input type="text" placeholder="Enter Destination (Ex: JFK)">
+                <input type="text" placeholder="Departure Airport (Ex: JFK)">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input id="destination" type="text" placeholder="Enter Destination (Ex: JFK)">
+                <input id="destination" type="text" placeholder="Arrival Airport (Ex: JFK)">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -45,11 +45,11 @@
 
         <div class="searchbar">
             <div>
-                <input type="text" placeholder="Enter Date (MM/DD/YYYY)">
+                <input type="text" placeholder="Departure Date (MM/DD/YYYY)">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input type="text" placeholder="Enter Date (MM/DD/YYYY)">
+                <input type="text" placeholder="Arrival Date (MM/DD/YYYY)">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -128,7 +128,52 @@
            <p><i class="fas fa-viruses fa-3x"></i></p>
         </div>
         <!--CHART GOES HERE-->
-        <div class="dummy-chart"></div>
+        <!-- <div class="dummy-chart"></div> -->
+        
+        <!-- adding HTML per the graph -->
+
+        <div class="chart" id="chartCases">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="chart" id="chartDeath">
+          <canvas id="myChartDeath"></canvas>
+        </div>
+        
+        <table class="table" id="dataTable">
+          <thead>
+            <th>Week</th>
+            <th>Total New Cases</th>
+            <th>Total New Deaths</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Last 7 Days</td>
+              <td id="week1Cases"></td>
+              <td id="week1Deaths"></td>
+            </tr>
+            <tr>
+              <td>8-14 Days Ago</td>
+              <td id="week2Cases"></td>
+              <td id="week2Deaths"></td>            
+            </tr>
+            <tr>
+              <td>15-21 Days Ago</td>
+              <td id="week3Cases"></td>
+              <td id="week3Deaths"></td>
+            </tr>
+            <tr>
+              <td>22-28 Days Ago</td>
+              <td id="week4Cases"></td>
+              <td id="week4Deaths"></td>
+            </tr>
+            <tr>
+              <td>29-35 Days Ago</td>
+              <td id="week5Cases"></td>
+              <td id="week5Deaths"></td>
+            </tr>
+          </tbody>
+        </table>
+
         <div class="about-tiles">
             <!--Developed By-->
             <p>Developed By</p>
@@ -178,51 +223,7 @@
             <strong>Bulma  & SCSS </strong> by Group 6 UT Coding Bootcamp.
           </p>
         </div>
-    </footer>
-
-    <!-- adding HTML per the graph -->
-
-    <table class="table" id="dataTable">
-      <thead>
-        <th>Week</th>
-        <th>Total New Cases</th>
-        <th>Total New Deaths</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Last 7 Days</td>
-          <td id="week1Cases">10</td>
-          <td id="week1Deaths">1200</td>
-        </tr>
-        <tr>
-          <td>8-14 Days Ago</td>
-          <td id="week2Cases">10</td>
-          <td id="week2Deaths">1200</td>            
-        </tr>
-        <tr>
-          <td>15-21 Days Ago</td>
-          <td id="week3Cases">10</td>
-          <td id="week3Deaths">1200</td>
-        </tr>
-        <tr>
-          <td>22-28 Days Ago</td>
-          <td id="week4Cases">10</td>
-          <td id="week4Deaths">1200</td>
-        </tr>
-        <tr>
-          <td>29-35 Days Ago</td>
-          <td id="week5Cases">10</td>
-          <td id="week5Deaths">1200</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <div class="chart">
-      <canvas id="myChart"></canvas>
-    </div>
-    <div class="chart">
-      <canvas id="myChartDeath"></canvas>
-    </div>
+    </footer>    
     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

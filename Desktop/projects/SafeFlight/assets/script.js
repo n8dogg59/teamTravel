@@ -282,6 +282,7 @@ $(document).ready(function() {
                             maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                             }
                         });
+                        
                         return myChart;
                         }
 
@@ -329,11 +330,9 @@ $(document).ready(function() {
 
                         // Map JSON values back to values array
                         var values = json.map(function (e) {
-                            console.log(e.totalnewcases);
                             return e.totalnewcases;
                         });
                         console.log(values); // ["10", "25", "55", "120"]
-
                         var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
 
                         var deathValues = json.map(function (f) {

@@ -70,7 +70,6 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "Wyoming", "abbreviation": "WY"}]
 
 $(document).ready(function() {    
-    
     function getCityState() {
         var airportCode = searchAirportEl.value.trim();  
         // This function will get the city and state from the airport code the user inputs
@@ -83,7 +82,8 @@ $(document).ready(function() {
         })
             .then(response => {
                 return response.json().then(function (response) {
-                    var searchedCity = response.city;
+                    var resultLocation = response.location;
+                    var searchedCity = resultLocation.split(',',1);
                     var searchedState = response.state;
                     for (i = 0; i < cityStateArr.length; i++) {
                         if (cityStateArr[i].name === searchedState) {
@@ -91,7 +91,7 @@ $(document).ready(function() {
                         }
                     }
                     getCounty(searchedCity, stateAbbr);
-                    totalStateCases(stateAbbr);
+                    totalStateCases(stateAbbr, searchedState);
                 })
             })
             .catch(err => {
@@ -112,7 +112,6 @@ $(document).ready(function() {
                             .then(function(response) {
                                 if (response.ok) {
                                     return response.json().then(function (response) {
-                                        // console.log(response);
                                         var countyName = response.County.name;
                                         var stateName = response.State.name;
                                         countyInfo(countyName, stateName, stateAbbr);
@@ -145,8 +144,8 @@ $(document).ready(function() {
                         // console.log(countyLength);
                         for (i = 0; i < countyLength.length; i++) {
                             if (countyLength[i].location.county === countyName) {
-                                console.log("Total Confirmed Cases in " + countyName + " County = " + countyLength[i].totalConfirmedCases);
-                                console.log("Total Deaths in " + countyName + " County = " + countyLength[i].totalDeaths);
+                                //console.log("Total Confirmed Cases in " + countyName + " County = " + countyLength[i].totalConfirmedCases);
+                                //console.log("Total Deaths in " + countyName + " County = " + countyLength[i].totalDeaths);
                                 var countyDeaths = countyLength[i].totalDeaths;
                                 var countyCases = countyLength[i].totalConfirmedCases;
                                 countyPopulation(countyName, stateName, countyCases, countyDeaths);
@@ -169,12 +168,12 @@ $(document).ready(function() {
                             for (i = 0; i < totalCounties.length; i++) {
                                 if (totalCounties[i][0] === countyName + " County, " + stateName) {
                                     var countyPopulation = totalCounties[i][1];
-                                    console.log("Population of " + countyName + " County = " + countyPopulation);
+                                    //console.log("Population of " + countyName + " County = " + countyPopulation);
                                 }
                             }
                             percentInfected = (countyCases / countyPopulation) * 100;
                             displayPercent = percentInfected.toFixed(2);
-                            // document.getElementById("".innerHTML) = displayPercent + "%";
+                            document.getElementById("countyCases").innerHTML = displayPercent + "% of " + countyName + " County has tested positive since the start of the pandemic.";
                         })
                     }
 
@@ -184,12 +183,12 @@ $(document).ready(function() {
     // This function gets the total new cases for each week.  The state data is manually added to the fetch but we should be able
     // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
     // fetch and pass it in.
-    function totalStateCases(stateAbbr) {
+    function totalStateCases(stateAbbr, searchedState) {
         fetch("https://api.covidtracking.com/v1/states/" + stateAbbr + "/daily.json")
             .then(function(response) {
                 if (response.ok) {
                     return response.json().then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         var dailyCases = response[1].positiveIncrease;
                         var weekOneTotalCases = 0;
                         var weekTwoTotalCases = 0;
@@ -246,45 +245,43 @@ $(document).ready(function() {
                         }
                         json.push(rowData);
                         }
-
                         console.log(json)
-
                         function BuildChart(labels, values, chartTitle) {
-                        var ctx = document.getElementById("myChart").getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                            labels: labels, // Our labels
-                            datasets: [{
-                                label: chartTitle, // Name the series
-                                data: values, // Our values
-                                backgroundColor: [ // Specify custom colors
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [ // Add custom color borders
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1 // Specify bar border width
-                            }]
-                            },
-                            options: {
-                            responsive: true, // Instruct chart js to respond nicely.
-                            maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
-                            }
-                        });
+                            var ctx = document.getElementById("myChart").getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                labels: labels, // Our labels
+                                datasets: [{
+                                    label: chartTitle, // Name the series
+                                    data: values, // Our values
+                                    backgroundColor: [ // Specify custom colors
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [ // Add custom color borders
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1 // Specify bar border width
+                                }]
+                                },
+                                options: {
+                                responsive: true, // Instruct chart js to respond nicely.
+                                maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
+                                }
+                            });
                         
-                        return myChart;
-                        }
+                            return myChart;
+                            }
 
                         function BuildChart2(labels, values, chartTitle) {
                             var ctx = document.getElementById("myChartDeath").getContext('2d');
@@ -333,13 +330,13 @@ $(document).ready(function() {
                             return e.totalnewcases;
                         });
                         console.log(values); // ["10", "25", "55", "120"]
-                        var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
+                        var chart = BuildChart(labels, values, "Weekly COVID Cases for " + searchedState);
 
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });
-
-                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths by State");
+                        console.log()
+                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths for " + searchedState);
          
                     })
                 } else {
@@ -348,5 +345,4 @@ $(document).ready(function() {
             })   
         }
     searchButton.addEventListener("click", getCityState);
-    //getCityState();
 })

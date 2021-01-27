@@ -359,3 +359,7 @@ main .virus {
   background-color: #c46a21;
 }
 /*# sourceMappingURL=style.css.map */
+
+#data-table {
+  display: none;
+}

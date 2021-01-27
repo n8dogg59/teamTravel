@@ -91,7 +91,7 @@ $(document).ready(function() {
                         }
                     }
                     getCounty(searchedCity, stateAbbr);
-                    totalStateCases(stateAbbr);
+                    totalStateCases(stateAbbr, searchedState);
                 })
             })
             .catch(err => {
@@ -184,7 +184,7 @@ $(document).ready(function() {
     // This function gets the total new cases for each week.  The state data is manually added to the fetch but we should be able
     // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
     // fetch and pass it in.
-    function totalStateCases(stateAbbr) {
+    function totalStateCases(stateAbbr, searchedState) {
         fetch("https://api.covidtracking.com/v1/states/" + stateAbbr + "/daily.json")
             .then(function(response) {
                 if (response.ok) {
@@ -248,7 +248,6 @@ $(document).ready(function() {
                         }
 
                         console.log(json)
-
                         function BuildChart(labels, values, chartTitle) {
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
@@ -333,13 +332,13 @@ $(document).ready(function() {
                             return e.totalnewcases;
                         });
                         console.log(values); // ["10", "25", "55", "120"]
-                        var chart = BuildChart(labels, values, "Weekly COVID Cases by State");
+                        var chart = BuildChart(labels, values, "Weekly COVID Cases for " + searchedState);
 
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });
-
-                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths by State");
+                        console.log()
+                        var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths for " + searchedState);
          
                     })
                 } else {

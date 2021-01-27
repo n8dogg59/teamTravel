@@ -7,8 +7,8 @@ var week2CasesEl = document.querySelector("#week2Cases");
 var week3CasesEl = document.querySelector("#week3Cases");
 var week4CasesEl = document.querySelector("#week4Cases");
 var stateAbbr = "";
-// var searchButton = document.getElementById("");  Need to get the button id for the search button
-// var searchAirportEl = document.querySelector("");  Need to get the input id for destination city
+var searchButton = document.getElementById("searchBtn");  
+var searchAirportEl = document.querySelector("#destination");
 var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "Alaska","abbreviation": "AK"},
     {"name": "American Samoa", "abbreviation": "AS"},
@@ -72,9 +72,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
 $(document).ready(function() {    
     
     function getCityState() {
-        // var airportCode = searchAirportEl.value.trim();  
+        var airportCode = searchAirportEl.value.trim();  
         // This function will get the city and state from the airport code the user inputs
-        fetch("https://airport-info.p.rapidapi.com/airport?iata=AUS", { // add the "airportCode" variable into fetch
+        fetch("https://airport-info.p.rapidapi.com/airport?iata=" + airportCode, { 
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "d0d36869f4msh08f660e28e5060bp1aef27jsncfbd043899ea",
@@ -329,6 +329,7 @@ $(document).ready(function() {
 
                         // Map JSON values back to values array
                         var values = json.map(function (e) {
+                            console.log(e.totalnewcases);
                             return e.totalnewcases;
                         });
                         console.log(values); // ["10", "25", "55", "120"]
@@ -347,6 +348,6 @@ $(document).ready(function() {
                 }
             })   
         }
-    // searchButton.addEventListener("click", getCityState);
-    getCityState();
+    searchButton.addEventListener("click", getCityState);
+    //getCityState();
 })

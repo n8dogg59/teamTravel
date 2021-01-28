@@ -5,6 +5,11 @@
           box-sizing: border-box;
 }
 
+#countyCases {
+  font-size: 44px;
+  text-align: center;
+}
+
 body {
   background-color: #FCF3CF;
   font-family: 'Montserrat', sans-serif;
@@ -136,6 +141,7 @@ main .results-wrap .resultbox-wrap .resultbox {
   margin-bottom: 50px;
   cursor: pointer;
   border-radius: 15px;
+  display: flex;
 }
 
 main .results-wrap .resultbox-wrap .resultbox:hover {
@@ -359,3 +365,7 @@ main .virus {
   background-color: #c46a21;
 }
 /*# sourceMappingURL=style.css.map */
+
+#data-table {
+  display: none;
+}

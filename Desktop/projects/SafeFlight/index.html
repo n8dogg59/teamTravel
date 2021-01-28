@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;300;400;500&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <title>Safe Flight</title>
+</head>
+<body>
+    <!--Header-->
+    <header>
+        <div class="navimage animate__animated animate__slideInLeft">
+            <img src="./assets/logo.svg" alt="">
+        </div>
+        <img src="./assets/wave.svg" alt="" class="wave">
+    </header>
+    <!--Container-->
+    <main>
+        <div class="from-to">
+            <h1>From</h1>
+            <p><i class="fas fa-plane fa-3x animate__animated animate__slideInLeft"></i></p>
+            <h1>To</h1>
+        </div>
+        <!--Search tab-->
+        <div class="searchbar">
+            <div>
+                <input type="text" placeholder="Departure Airport (Ex: JFK)">
+                <i class="fas fa-search"></i>
+            </div>
+            <div>
+                <input id="destination" type="text" placeholder="Arrival Airport (Ex: JFK)">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="calendar animate__animated animate__heartBeat">
+            <p><i class="fas fa-calendar-alt fa-3x"></i></p>
+        </div>
+
+        <div class="searchbar">
+            <div>
+                <input type="text" placeholder="Departure Date (MM/DD/YYYY)">
+                <i class="fas fa-search"></i>
+            </div>
+            <div>
+                <input type="text" placeholder="Arrival Date (MM/DD/YYYY)">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <!--SideBar-->
+        <div class="tile is-parent position-right">
+            <article class="tile is-child notification is-warning">
+              <div class="content">
+                <p class="title">How it Works</p>
+                <p class="subtitle">What we do </p>
+                <div class="content">
+                    We gather the best prices for air travel also giving updates on COVID-19 stats. Enter the destination and date and hit get results!
+                </div>
+              </div>
+            </article>
+          </div>
+        <!--Results-->
+        <div class="results-wrap">
+            <div class="result-button">
+                <button id="searchBtn" class="results-p"> Get Results</p>
+            </div>
+            <div class="resultbox-wrap">
+                <div class="resultbox">
+                    <p></p>
+                </div>
+                <div class="resultbox">
+                    <p></p>
+                </div>
+                <div class="resultbox">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <!--slider-->
+        <div id="slider">
+            <input type="radio" name="slider" id="slide1" checked>
+            <input type="radio" name="slider" id="slide2">
+            <input type="radio" name="slider" id="slide3">
+            <input type="radio" name="slider" id="slide4">
+            <div id="slides">
+               <div id="overflow">
+                  <div class="inner">
+                     <div class="slide slide_1">
+                        <div class="slide-content cdc-img">
+                        </div>
+                     </div>
+                     <div class="slide slide_2">
+                        <div class="slide-content cdc-img">
+                        </div>
+                     </div>
+                     <div class="slide slide_3">
+                        <div class="slide-content cdc-img">
+                        </div>
+                     </div>
+                     <div class="slide slide_4">
+                        <div class="slide-content cdc-img">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="controls">
+               <label for="slide1"></label>
+               <label for="slide2"></label>
+               <label for="slide3"></label>
+               <label for="slide4"></label>
+            </div>
+            <div id="bullets">
+               <label for="slide1"></label>
+               <label for="slide2"></label>
+               <label for="slide3"></label>
+               <label for="slide4"></label>
+            </div>
+         </div>
+         <!--Virus-->
+         <div class="virus animate__animated animate__heartBeat">
+           <p><i class="fas fa-viruses fa-3x"></i></p>
+        </div>
+        <!--CHART GOES HERE-->
+        <!-- <div class="dummy-chart"></div> -->
+        <div>
+          <h2 id="countyCases"></h2>
+        </div>
+        <!-- adding HTML per the graph -->
+
+        <div class="chart" id="chartCases">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="chart" id="chartDeath">
+          <canvas id="myChartDeath"></canvas>
+        </div>
+        
+        <table class="table" id="dataTable">
+          <thead>
+            <th>Week</th>
+            <th>Total New Cases</th>
+            <th>Total New Deaths</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Last 7 Days</td>
+              <td id="week1Cases"></td>
+              <td id="week1Deaths"></td>
+            </tr>
+            <tr>
+              <td>8-14 Days Ago</td>
+              <td id="week2Cases"></td>
+              <td id="week2Deaths"></td>            
+            </tr>
+            <tr>
+              <td>15-21 Days Ago</td>
+              <td id="week3Cases"></td>
+              <td id="week3Deaths"></td>
+            </tr>
+            <tr>
+              <td>22-28 Days Ago</td>
+              <td id="week4Cases"></td>
+              <td id="week4Deaths"></td>
+            </tr>
+            <tr>
+              <td>29-35 Days Ago</td>
+              <td id="week5Cases"></td>
+              <td id="week5Deaths"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="about-tiles">
+            <!--Developed By-->
+            <p>Developed By</p>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/640x480.png">
+                  </figure>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Jose Ramirez</p>
+                  <p class="subtitle">Front End</p>
+                  <figure class="image is-4by3">
+                    <img src=".//assets/joseramirez.jpg">
+                  </figure>
+                </article>
+            </div>
+        </div>
+
+    </main>
+    <!--Footer-->
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma  & SCSS </strong> by Group 6 UT Coding Bootcamp.
+          </p>
+        </div>
+    </footer>    
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- <script src="chart.js"></script> -->
+  <script src="./assets/config.js"></script>
+  <script src="./assets/script.js"></script>
+    <!-- <script src="./assets/config.js"></script>
+    <script src="./assets/script.js"></script> -->
+
+</body>
+</html>

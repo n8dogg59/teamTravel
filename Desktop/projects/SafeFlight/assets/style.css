@@ -5,6 +5,11 @@
           box-sizing: border-box;
 }
 
+#countyCases {
+  font-size: 44px;
+  text-align: center;
+}
+
 body {
   background-color: #FCF3CF;
   font-family: 'Montserrat', sans-serif;
@@ -360,3 +365,7 @@ main .virus {
   background-color: #c46a21;
 }
 /*# sourceMappingURL=style.css.map */
+
+#data-table {
+  display: none;
+}

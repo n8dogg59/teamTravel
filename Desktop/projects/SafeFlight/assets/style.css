@@ -136,6 +136,7 @@ main .results-wrap .resultbox-wrap .resultbox {
   margin-bottom: 50px;
   cursor: pointer;
   border-radius: 15px;
+  display: flex;
 }
 
 main .results-wrap .resultbox-wrap .resultbox:hover {

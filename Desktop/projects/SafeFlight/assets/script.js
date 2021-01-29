@@ -69,8 +69,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "West Virginia", "abbreviation": "WV"},
     {"name": "Wisconsin", "abbreviation": "WI"},
     {"name": "Wyoming", "abbreviation": "WY"}]
-
-$(document).ready(function() {    
+    
     function getCityState() {
         var airportCode = searchAirportEl.value.trim();  
         // This function will get the city and state from the airport code the user inputs
@@ -387,10 +386,7 @@ $(document).ready(function() {
             newListItem.appendChild(newWeekFiveDiv);
             covidListEl.appendChild(newListItem);
         }
-
-
     }
 
     searchButton.addEventListener("click", getCityState);
-    //searchButton.addEventListener("click", addCovidStorage);
-})
+    window.onload = displayCovidList();

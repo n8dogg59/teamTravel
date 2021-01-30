@@ -82,6 +82,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
         })
             .then(response => {
                 return response.json().then(function (response) {
+                    console.log(response);
                     var resultLocation = response.location;
                     var searchedCity = resultLocation.split(',',1);
                     var searchedState = response.state;
@@ -290,11 +291,12 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 }]
                                 },
                                 options: {
+                                events:["click"],
                                 responsive: true, // Instruct chart js to respond nicely.
                                 maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                                 }
                             });
-                        
+                            console.log(myChart);
                             return myChart;
                             }
 
@@ -327,6 +329,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 }]
                                 },
                                 options: {
+                                events:["click"],
                                 responsive: true, // Instruct chart js to respond nicely.
                                 maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                                 }
@@ -346,11 +349,10 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         });
                         console.log(values); // ["10", "25", "55", "120"]
                         var chart = BuildChart(labels, values, "Weekly COVID Cases for " + searchedState);
-
+                        console.log(chart);
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });
-                        console.log()
                         var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths for " + searchedState);
          
                     })

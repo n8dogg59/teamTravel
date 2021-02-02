@@ -334,6 +334,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                                 }
                             });
+                            console.log(myChart);
                             return myChart;
                             }
 

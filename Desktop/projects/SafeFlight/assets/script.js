@@ -230,21 +230,6 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         document.getElementById("week4Deaths").innerHTML = weekFourDeathIncrease;
                         document.getElementById("week5Deaths").innerHTML = weekFiveDeathIncrease;
 
-                        // LOCAL STORAGE STARTS HERE
-                        var currentEntry = {
-                            state : searchedState,
-                            weekOne : weekOneTotalCases,
-                            weekTwo : weekTwoTotalCases,
-                            weekThree : weekThreeTotalCases,
-                            weekFour : weekFourTotalCases,
-                            weekFive : weekFiveTotalCases
-                        };
-                        var covidList = JSON.parse(localStorage.getItem("covidList")) || [];
-                        covidList.push(currentEntry);
-                        localStorage.setItem("covidList", JSON.stringify(covidList));
-                        displayCovidList();
-                        // LOCAL STORAGE ENDS HERE
-
                         var table = document.getElementById('dataTable');
                         var json = []; // First row needs to be headers 
                         var headers = [];
@@ -363,33 +348,5 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
             })   
         }
     
-    function displayCovidList() {
-        covidListEl.innerHTML = "";
-        var results = JSON.parse(localStorage.getItem("covidList")) || [];
-        for (i = 0; i < results.length; i++) {
-            console.log(results[i]);
-            var newListItem = document.createElement("li");
-            var newNameDiv = document.createElement("div");
-            var newWeekOneDiv = document.createElement("div");
-            var newWeekTwoDiv = document.createElement("div");
-            var newWeekThreeDiv = document.createElement("div");
-            var newWeekFourDiv = document.createElement("div");
-            var newWeekFiveDiv = document.createElement("div");
-            newNameDiv.textContent = results[i].state;
-            newWeekOneDiv.textContent = results[i].weekOne + " people tested positive in the last 7 days.";
-            newWeekTwoDiv.textContent = results[i].weekTwo + " people tested positive in the last 8-14 days.";
-            newWeekThreeDiv.textContent = results[i].weekThree + " people tested positive in the last 15-21 days.";
-            newWeekFourDiv.textContent = results[i].weekFour + " people tested positive in the last 22-28 days.";
-            newWeekFiveDiv.textContent = results[i].weekFive + " people tested positive in the last 29-35 days.";
-            newListItem.appendChild(newNameDiv);
-            newListItem.appendChild(newWeekOneDiv);
-            newListItem.appendChild(newWeekTwoDiv);
-            newListItem.appendChild(newWeekThreeDiv);
-            newListItem.appendChild(newWeekFourDiv);
-            newListItem.appendChild(newWeekFiveDiv);
-            covidListEl.appendChild(newListItem);
-        }
-    }
-
     searchButton.addEventListener("click", getCityState);
-    window.onload = displayCovidList();
+    

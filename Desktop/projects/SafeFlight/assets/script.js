@@ -231,13 +231,57 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         document.getElementById("week4Deaths").innerHTML = week4DeathIncrease;
                         document.getElementById("week5Deaths").innerHTML = week5DeathIncrease;
 
+                        // Adds commas to the table that will show up on the html page
+                        var casesOne = week1TotalCases.toString().split(".");
+                        casesOne[0] = casesOne[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week1TotalCasesVisible = casesOne.join(".");
+                        var casesTwo = week2TotalCases.toString().split(".");
+                        casesTwo[0] = casesTwo[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week2TotalCasesVisible = casesTwo.join(".");
+                        var casesThree = week3TotalCases.toString().split(".");
+                        casesThree[0] = casesThree[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week3TotalCasesVisible = casesThree.join(".");
+                        var casesFour = week4TotalCases.toString().split(".");
+                        casesFour[0] = casesFour[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week4TotalCasesVisible = casesFour.join(".");
+                        var casesFive = week5TotalCases.toString().split(".");
+                        casesFive[0] = casesFive[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week5TotalCasesVisible = casesFive.join(".");
+                        var deathsOne = week1DeathIncrease.toString().split(".");
+                        deathsOne[0] = deathsOne[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week1DeathIncreaseVisible = deathsOne.join(".");
+                        var deathsTwo = week2DeathIncrease.toString().split(".");
+                        deathsTwo[0] = deathsTwo[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week2DeathIncreaseVisible = deathsTwo.join(".");
+                        var deathsThree = week3DeathIncrease.toString().split(".");
+                        deathsThree[0] = deathsThree[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week3DeathIncreaseVisible = deathsThree.join(".");
+                        var deathsFour = week4DeathIncrease.toString().split(".");
+                        deathsFour[0] = deathsFour[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week4DeathIncreaseVisible = deathsFour.join(".");
+                        var deathsFive = week5DeathIncrease.toString().split(".");
+                        deathsFive[0] = deathsFive[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week5DeathIncreaseVisible = deathsFive.join(".");
+
+                        // Populates the dummy chart that shows up on the html page but chart.js does not use
+                        document.getElementById("week1CasesVisible").innerHTML = week1TotalCasesVisible;                        
+                        document.getElementById("week2CasesVisible").innerHTML = week2TotalCasesVisible;
+                        document.getElementById("week3CasesVisible").innerHTML = week3TotalCasesVisible;
+                        document.getElementById("week4CasesVisible").innerHTML = week4TotalCasesVisible;
+                        document.getElementById("week5CasesVisible").innerHTML = week5TotalCasesVisible;
+                        document.getElementById("week1DeathsVisible").innerHTML = week1DeathIncreaseVisible;                        
+                        document.getElementById("week2DeathsVisible").innerHTML = week2DeathIncreaseVisible;
+                        document.getElementById("week3DeathsVisible").innerHTML = week3DeathIncreaseVisible;
+                        document.getElementById("week4DeathsVisible").innerHTML = week4DeathIncreaseVisible;
+                        document.getElementById("week5DeathsVisible").innerHTML = week5DeathIncreaseVisible;
+
                         var table = document.getElementById('dataTable');
+                        
                         var json = []; // First row needs to be headers 
                         var headers = [];
                         for (var i = 0; i < table.rows[0].cells.length; i++) {
                         headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
                         }
-
                         // Go through cells 
                         for (var i = 1; i < table.rows.length; i++) {
                         var tableRow = table.rows[i];

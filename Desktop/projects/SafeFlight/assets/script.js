@@ -219,7 +219,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 var week5DeathIncrease = week5DeathIncrease + response[i].deathIncrease;
                             }
                         }
-                                                
+                                            
                         document.getElementById("week1Cases").innerHTML = week1TotalCases;                        
                         document.getElementById("week2Cases").innerHTML = week2TotalCases;
                         document.getElementById("week3Cases").innerHTML = week3TotalCases;
@@ -380,7 +380,8 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 scales: {
                                     yAxes: [{
                                         ticks: {
-                                            beginAtZero:false,
+                                            suggestedMin: 500,
+                                            //beginAtZero:true,
                                             callback: function(value, index, values) {
                                                 if(parseInt(value) >= 1000){
                                                    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -390,9 +391,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                            }                            
                                         }
                                     }],
-                                    xAxes: [{
-                                        offset: true
-                                    }]
+                                    // xAxes: [{
+                                    //     offset: true
+                                    // }]
                                 }
                                 
                                     

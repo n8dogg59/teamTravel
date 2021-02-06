@@ -134,36 +134,71 @@
         </div>
         
         <table class="table" id="dataTable">
-          <thead>
+          <thead style="display: none;">
             <th>Week</th>
             <th>Total New Cases</th>
             <th>Total New Deaths</th>
           </thead>
           <tbody>
-            <tr>
-              <td>Last 7 Days</td>
-              <td id="week1Cases"></td>
-              <td id="week1Deaths"></td>
+            <tr style="display: none;">
+              <td>29-35 Days Ago</td>
+              <td id="week5Cases"></td>
+              <td id="week5Deaths"></td>
             </tr>
-            <tr>
-              <td>8-14 Days Ago</td>
-              <td id="week2Cases"></td>
-              <td id="week2Deaths"></td>            
+            <tr style="display: none;"> 
+              <td>22-28 Days Ago</td>
+              <td id="week4Cases"></td>
+              <td id="week4Deaths"></td>            
             </tr>
-            <tr>
+            <tr style="display: none;">
               <td>15-21 Days Ago</td>
               <td id="week3Cases"></td>
               <td id="week3Deaths"></td>
             </tr>
-            <tr>
-              <td>22-28 Days Ago</td>
-              <td id="week4Cases"></td>
-              <td id="week4Deaths"></td>
+            <tr style="display: none;">
+              <td>8-14 Days Ago</td>
+              <td id="week2Cases"></td>
+              <td id="week2Deaths"></td>
             </tr>
-            <tr>
+            <tr style="display: none;">
+              <td>Last 7 Days</td>
+              <td id="week1Cases"></td>
+              <td id="week1Deaths"></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="table">
+          <thead id="tableHead">
+            <th>Week</th>
+            <th>Total New Cases</th>
+            <th>Total New Deaths</th>
+          </thead>
+          <tbody>
+            <tr id="tableRow">
               <td>29-35 Days Ago</td>
-              <td id="week5Cases"></td>
-              <td id="week5Deaths"></td>
+              <td id="week5CasesVisible"></td>
+              <td id="week5DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow"> 
+              <td>22-28 Days Ago</td>
+              <td id="week4CasesVisible"></td>
+              <td id="week4DeathsVisible"></td>            
+            </tr>
+            <tr id="tableRow">
+              <td>15-21 Days Ago</td>
+              <td id="week3CasesVisible"></td>
+              <td id="week3DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow">
+              <td>8-14 Days Ago</td>
+              <td id="week2CasesVisible"></td>
+              <td id="week2DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow">
+              <td>Last 7 Days</td>
+              <td id="week1CasesVisible"></td>
+              <td id="week1DeathsVisible"></td>
             </tr>
           </tbody>
         </table>

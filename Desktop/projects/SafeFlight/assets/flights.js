@@ -81,10 +81,10 @@ var flightResults = function(bearerToken) {
                 airlineEl.textContent = airlines[carrierCodes[i]];
 
                 var outboundTimesEl = document.createElement("textbox");
-                outboundTimesEl.textContent = "Outbound Departure Time: " + outboundDepartTimes[i] + "\n" + "Outbound Arrival Time: " + outboundArriveTimes[i];
+                outboundTimesEl.textContent = "Departing Flight: " + outboundDepartTimes[i] + " - " + outboundArriveTimes[i];
 
                 var inboundTimesEl = document.createElement("textbox");
-                inboundTimesEl.textContent = "Return Departure Time: " + inboundDepartTimes[i] + "\n" + "Return Arrival Time: " + inboundArriveTimes[i];
+                inboundTimesEl.textContent = "Return Flight: " + inboundDepartTimes[i] + " - " + inboundArriveTimes[i];
                 
                 flightsEl.appendChild(resultsContainerEl);
                 resultsContainerEl.appendChild(pricesEl);

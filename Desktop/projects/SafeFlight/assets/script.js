@@ -9,6 +9,7 @@ var week4CasesEl = document.querySelector("#week4Cases");
 var stateAbbr = "";
 var searchButton = document.getElementById("searchBtn");  
 var searchAirportEl = document.querySelector("#destination");
+var covidListEl = document.getElementById("covidList");
 var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "Alaska","abbreviation": "AK"},
     {"name": "American Samoa", "abbreviation": "AS"},
@@ -68,8 +69,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "West Virginia", "abbreviation": "WV"},
     {"name": "Wisconsin", "abbreviation": "WI"},
     {"name": "Wyoming", "abbreviation": "WY"}]
-
-$(document).ready(function() {    
+    
     function getCityState() {
         var airportCode = searchAirportEl.value.trim();  
         // This function will get the city and state from the airport code the user inputs
@@ -82,6 +82,7 @@ $(document).ready(function() {
         })
             .then(response => {
                 return response.json().then(function (response) {
+                    console.log(response);
                     var resultLocation = response.location;
                     var searchedCity = resultLocation.split(',',1);
                     var searchedState = response.state;
@@ -190,52 +191,97 @@ $(document).ready(function() {
                     return response.json().then(function (response) {
                         //console.log(response);
                         var dailyCases = response[1].positiveIncrease;
-                        var weekOneTotalCases = 0;
-                        var weekTwoTotalCases = 0;
-                        var weekThreeTotalCases = 0;
-                        var weekFourTotalCases = 0;
-                        var weekFiveTotalCases = 0;
-                        var weekOneDeathIncrease = 0;
-                        var weekTwoDeathIncrease = 0;
-                        var weekThreeDeathIncrease = 0;
-                        var weekFourDeathIncrease = 0;
-                        var weekFiveDeathIncrease = 0;
+                        var week1TotalCases = 0;
+                        var week2TotalCases = 0;
+                        var week3TotalCases = 0;
+                        var week4TotalCases = 0;
+                        var week5TotalCases = 0;
+                        var week1DeathIncrease = 0;
+                        var week2DeathIncrease = 0;
+                        var week3DeathIncrease = 0;
+                        var week4DeathIncrease = 0;
+                        var week5DeathIncrease = 0;
                         for (i = 0; i < 35; i++) {
                             if (i < 7) {
-                                var weekOneTotalCases = weekOneTotalCases + response[i].positiveIncrease;
-                                var weekOneDeathIncrease = weekOneDeathIncrease + response[i].deathIncrease;
+                                var week1TotalCases = week1TotalCases + response[i].positiveIncrease;
+                                var week1DeathIncrease = week1DeathIncrease + response[i].deathIncrease;
                             } else if (i > 6 && i < 14) {
-                                var weekTwoTotalCases = weekTwoTotalCases + response[i].positiveIncrease;
-                                var weekTwoDeathIncrease = weekTwoDeathIncrease + response[i].deathIncrease;
+                                var week2TotalCases = week2TotalCases + response[i].positiveIncrease;
+                                var week2DeathIncrease = week2DeathIncrease + response[i].deathIncrease;
                             } else if (i > 13 && i < 21) {
-                                var weekThreeTotalCases = weekThreeTotalCases + response[i].positiveIncrease;
-                                var weekThreeDeathIncrease = weekThreeDeathIncrease + response[i].deathIncrease;
+                                var week3TotalCases = week3TotalCases + response[i].positiveIncrease;
+                                var week3DeathIncrease = week3DeathIncrease + response[i].deathIncrease;
                             } else if (i > 20 && i < 28) {
-                                var weekFourTotalCases = weekFourTotalCases + response[i].positiveIncrease;
-                                var weekFourDeathIncrease = weekFourDeathIncrease + response[i].deathIncrease;
+                                var week4TotalCases = week4TotalCases + response[i].positiveIncrease;
+                                var week4DeathIncrease = week4DeathIncrease + response[i].deathIncrease;
                             } else if (i > 27 && i < 35) {
-                                var weekFiveTotalCases = weekFiveTotalCases + response[i].positiveIncrease;
-                                var weekFiveDeathIncrease = weekFiveDeathIncrease + response[i].deathIncrease;
+                                var week5TotalCases = week5TotalCases + response[i].positiveIncrease;
+                                var week5DeathIncrease = week5DeathIncrease + response[i].deathIncrease;
                             }
                         }
-                        document.getElementById("week1Cases").innerHTML = weekOneTotalCases;                        
-                        document.getElementById("week2Cases").innerHTML = weekTwoTotalCases;
-                        document.getElementById("week3Cases").innerHTML = weekThreeTotalCases;
-                        document.getElementById("week4Cases").innerHTML = weekFourTotalCases;
-                        document.getElementById("week5Cases").innerHTML = weekFiveTotalCases;
-                        document.getElementById("week1Deaths").innerHTML = weekOneDeathIncrease;                        
-                        document.getElementById("week2Deaths").innerHTML = weekTwoDeathIncrease;
-                        document.getElementById("week3Deaths").innerHTML = weekThreeDeathIncrease;
-                        document.getElementById("week4Deaths").innerHTML = weekFourDeathIncrease;
-                        document.getElementById("week5Deaths").innerHTML = weekFiveDeathIncrease;
+                                            
+                        document.getElementById("week1Cases").innerHTML = week1TotalCases;                        
+                        document.getElementById("week2Cases").innerHTML = week2TotalCases;
+                        document.getElementById("week3Cases").innerHTML = week3TotalCases;
+                        document.getElementById("week4Cases").innerHTML = week4TotalCases;
+                        document.getElementById("week5Cases").innerHTML = week5TotalCases;
+                        document.getElementById("week1Deaths").innerHTML = week1DeathIncrease;                        
+                        document.getElementById("week2Deaths").innerHTML = week2DeathIncrease;
+                        document.getElementById("week3Deaths").innerHTML = week3DeathIncrease;
+                        document.getElementById("week4Deaths").innerHTML = week4DeathIncrease;
+                        document.getElementById("week5Deaths").innerHTML = week5DeathIncrease;
+
+                        // Adds commas to the table that will show up on the html page
+                        var casesOne = week1TotalCases.toString().split(".");
+                        casesOne[0] = casesOne[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week1TotalCasesVisible = casesOne.join(".");
+                        var casesTwo = week2TotalCases.toString().split(".");
+                        casesTwo[0] = casesTwo[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week2TotalCasesVisible = casesTwo.join(".");
+                        var casesThree = week3TotalCases.toString().split(".");
+                        casesThree[0] = casesThree[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week3TotalCasesVisible = casesThree.join(".");
+                        var casesFour = week4TotalCases.toString().split(".");
+                        casesFour[0] = casesFour[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week4TotalCasesVisible = casesFour.join(".");
+                        var casesFive = week5TotalCases.toString().split(".");
+                        casesFive[0] = casesFive[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week5TotalCasesVisible = casesFive.join(".");
+                        var deathsOne = week1DeathIncrease.toString().split(".");
+                        deathsOne[0] = deathsOne[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week1DeathIncreaseVisible = deathsOne.join(".");
+                        var deathsTwo = week2DeathIncrease.toString().split(".");
+                        deathsTwo[0] = deathsTwo[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week2DeathIncreaseVisible = deathsTwo.join(".");
+                        var deathsThree = week3DeathIncrease.toString().split(".");
+                        deathsThree[0] = deathsThree[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week3DeathIncreaseVisible = deathsThree.join(".");
+                        var deathsFour = week4DeathIncrease.toString().split(".");
+                        deathsFour[0] = deathsFour[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week4DeathIncreaseVisible = deathsFour.join(".");
+                        var deathsFive = week5DeathIncrease.toString().split(".");
+                        deathsFive[0] = deathsFive[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        week5DeathIncreaseVisible = deathsFive.join(".");
+
+                        // Populates the dummy chart that shows up on the html page but chart.js does not use
+                        document.getElementById("week1CasesVisible").innerHTML = week1TotalCasesVisible;                        
+                        document.getElementById("week2CasesVisible").innerHTML = week2TotalCasesVisible;
+                        document.getElementById("week3CasesVisible").innerHTML = week3TotalCasesVisible;
+                        document.getElementById("week4CasesVisible").innerHTML = week4TotalCasesVisible;
+                        document.getElementById("week5CasesVisible").innerHTML = week5TotalCasesVisible;
+                        document.getElementById("week1DeathsVisible").innerHTML = week1DeathIncreaseVisible;                        
+                        document.getElementById("week2DeathsVisible").innerHTML = week2DeathIncreaseVisible;
+                        document.getElementById("week3DeathsVisible").innerHTML = week3DeathIncreaseVisible;
+                        document.getElementById("week4DeathsVisible").innerHTML = week4DeathIncreaseVisible;
+                        document.getElementById("week5DeathsVisible").innerHTML = week5DeathIncreaseVisible;
 
                         var table = document.getElementById('dataTable');
+                        
                         var json = []; // First row needs to be headers 
                         var headers = [];
                         for (var i = 0; i < table.rows[0].cells.length; i++) {
                         headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
                         }
-
                         // Go through cells 
                         for (var i = 1; i < table.rows.length; i++) {
                         var tableRow = table.rows[i];
@@ -275,11 +321,27 @@ $(document).ready(function() {
                                 }]
                                 },
                                 options: {
+                                events:["click"],
                                 responsive: true, // Instruct chart js to respond nicely.
                                 maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:false,
+                                            callback: function(value, index, values) {
+                                                if(parseInt(value) >= 1000){
+                                                   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                } else {
+                                                   return value;
+                                                }
+                                           }                            
+                                        }
+                                    }]
+                                }
                                 }
                             });
-                        
+                            console.log(myChart);
+                            console.log(values);
                             return myChart;
                             }
 
@@ -312,10 +374,33 @@ $(document).ready(function() {
                                 }]
                                 },
                                 options: {
+                                events:["click"],
                                 responsive: true, // Instruct chart js to respond nicely.
                                 maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            suggestedMin: 500,
+                                            //beginAtZero:true,
+                                            callback: function(value, index, values) {
+                                                if(parseInt(value) >= 1000){
+                                                   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                } else {
+                                                   return value;
+                                                }
+                                           }                            
+                                        }
+                                    }],
+                                    // xAxes: [{
+                                    //     offset: true
+                                    // }]
+                                }
+                                
+                                    
+                                
                                 }
                             });
+                            console.log(myChart);
                             return myChart;
                             }
 
@@ -331,11 +416,10 @@ $(document).ready(function() {
                         });
                         console.log(values); // ["10", "25", "55", "120"]
                         var chart = BuildChart(labels, values, "Weekly COVID Cases for " + searchedState);
-
+                        console.log(chart);
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });
-                        console.log()
                         var chart = BuildChart2(labels, deathValues, "Weekly Covid Deaths for " + searchedState);
          
                     })
@@ -344,5 +428,6 @@ $(document).ready(function() {
                 }
             })   
         }
+    
     searchButton.addEventListener("click", getCityState);
-})
+    

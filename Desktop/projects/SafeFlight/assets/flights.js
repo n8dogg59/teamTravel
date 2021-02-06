@@ -4,10 +4,10 @@ var departDateSearch = document.getElementById("depart-date");
 var returnDateSearch = document.getElementById("return-date");
 var originCodeSearch = document.getElementById("origin");
 var destCodeSearch = document.getElementById("destination");
-/* var departDate = "2021-02-01";
-var returnDate = "2021-02-07";
-var originCode = "IAH";
-var destCode = "JFK"; */
+
+$(document).ready(function() {
+    loadData();
+});
 
 $(document).ready(function() {
     loadData();
@@ -36,8 +36,8 @@ var getAuth = function() {
 };
 
 var flightResults = function(bearerToken) {
-    var originCode = originCodeSearch.value.trim();
-    var destCode = destCodeSearch.value.trim();
+    var originCode = originCodeSearch.value.trim().toUpperCase();
+    var destCode = destCodeSearch.value.trim().toUpperCase();
     var departDate = departDateSearch.value.trim();
     var returnDate = returnDateSearch.value.trim();
     var myHeaders = {Authorization: "Bearer " + bearerToken};
@@ -78,17 +78,17 @@ var flightResults = function(bearerToken) {
                 var resultsContainerEl = document.createElement("div");
                 resultsContainerEl.classList = "resultbox";
 
-                var pricesEl = document.createElement("div");
+                var pricesEl = document.createElement("textbox");
                 pricesEl.textContent = "Price: " + ticketPrices[i]; 
 
-                var airlineEl = document.createElement("div");
-                airlineEl.textContent = "Airline: " + airlines[carrierCodes[i]];
+                var airlineEl = document.createElement("textbox");
+                airlineEl.textContent = airlines[carrierCodes[i]];
 
                 var outboundTimesEl = document.createElement("textbox");
-                outboundTimesEl.textContent = "Outbound Departure Time: " + outboundDepartTimes[i] + "\n" + "Outbound Arrival Time: " + outboundArriveTimes[i];
+                outboundTimesEl.textContent = "Departing Flight: " + outboundDepartTimes[i] + " - " + outboundArriveTimes[i];
 
                 var inboundTimesEl = document.createElement("textbox");
-                inboundTimesEl.textContent = "Inbound Departure Time: " + inboundDepartTimes[i] + "\n" + "Inbound Arrival Time: " + inboundArriveTimes[i];
+                inboundTimesEl.textContent = "Return Flight: " + inboundDepartTimes[i] + " - " + inboundArriveTimes[i];
                 
                 flightsEl.appendChild(resultsContainerEl);
                 resultsContainerEl.appendChild(pricesEl);
@@ -97,7 +97,7 @@ var flightResults = function(bearerToken) {
                 resultsContainerEl.appendChild(inboundTimesEl);                
             };
         })
-        .catch(error => console.log('error', error));
+        .catch(error => displayError(error));
     
     saveData();
 
@@ -125,6 +125,17 @@ var loadData = function() {
     destCodeSearch.value = destCode
     departDateSearch.value = departDate
     returnDateSearch.value = returnDate
+};
+
+var displayError = function() {
+    var alert = document.createElement("textbox");
+    var resultsContainerEl = document.createElement("div");
+
+    resultsContainerEl.classList = "resultbox";
+    alert.textContent = 'Enter a 3 letter airport code in the "From" and "To" bubbles.';
+
+    flightsEl.appendChild(resultsContainerEl);
+    resultsContainerEl.appendChild(alert);
 };
 
 searchBtn.addEventListener("click", getAuth);

@@ -31,11 +31,11 @@
         <!--Search tab-->
         <div class="searchbar">
             <div>
-                <input id="origin" type="text" placeholder="Enter Origin (Ex: IAH)">
+                <input id="origin" type="text" placeholder="Origin Airport (Ex: AUS)">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input id="destination" type="text" placeholder="Arrival Airport (Ex: JFK)">
+                <input id="destination" type="text" placeholder="Destination Airport (Ex: JFK)">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -45,11 +45,11 @@
 
         <div class="searchbar">
             <div>
-                <input id="depart-date" type="text" placeholder="Depart Date (YYYY-MM-DD)">
+                <input id="depart-date" type="date" placeholder="Depart Date">
                 <i class="fas fa-search"></i>
             </div>
             <div>
-                <input id="return-date" type="text" placeholder="Return Date (YYYY-MM-DD)">
+                <input id="return-date" type="date" placeholder="Return Date">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -71,15 +71,7 @@
                 <button id="searchBtn" class="results-p"> Get Results</p>
             </div>
             <div id="resultbox-wrap" class="resultbox-wrap">
-<!--                 <div class="resultbox">
-                    <p></p>
-                </div>
-                <div class="resultbox">
-                    <p></p>
-                </div>
-                <div class="resultbox">
-                    <p></p>
-                </div> -->
+              <!--This is where each result's container populates-->
             </div>
         </div>
         <!--slider-->
@@ -142,52 +134,74 @@
         </div>
         
         <table class="table" id="dataTable">
-          <thead>
+          <thead style="display: none;">
             <th>Week</th>
             <th>Total New Cases</th>
             <th>Total New Deaths</th>
           </thead>
           <tbody>
-            <tr>
-              <td>Last 7 Days</td>
-              <td id="week1Cases"></td>
-              <td id="week1Deaths"></td>
-            </tr>
-            <tr>
-              <td>8-14 Days Ago</td>
-              <td id="week2Cases"></td>
-              <td id="week2Deaths"></td>            
-            </tr>
-            <tr>
-              <td>15-21 Days Ago</td>
-              <td id="week3Cases"></td>
-              <td id="week3Deaths"></td>
-            </tr>
-            <tr>
-              <td>22-28 Days Ago</td>
-              <td id="week4Cases"></td>
-              <td id="week4Deaths"></td>
-            </tr>
-            <tr>
+            <tr style="display: none;">
               <td>29-35 Days Ago</td>
               <td id="week5Cases"></td>
               <td id="week5Deaths"></td>
             </tr>
+            <tr style="display: none;"> 
+              <td>22-28 Days Ago</td>
+              <td id="week4Cases"></td>
+              <td id="week4Deaths"></td>            
+            </tr>
+            <tr style="display: none;">
+              <td>15-21 Days Ago</td>
+              <td id="week3Cases"></td>
+              <td id="week3Deaths"></td>
+            </tr>
+            <tr style="display: none;">
+              <td>8-14 Days Ago</td>
+              <td id="week2Cases"></td>
+              <td id="week2Deaths"></td>
+            </tr>
+            <tr style="display: none;">
+              <td>Last 7 Days</td>
+              <td id="week1Cases"></td>
+              <td id="week1Deaths"></td>
+            </tr>
           </tbody>
         </table>
-
-        <!-- Local storages section starts here -->
-        <h2>Previously Searched Cities</h2>
-            <ol type="1" id="covidList">
-                <li id="covidListItem">
-                    <div id="covidState"></div>
-                    <div id="covidWeekOne"></div>
-                    <div id="covidWeekTwo"></div>
-                    <div id="covidWeekThree"></div>
-                    <div id="covidWeekFour"></div>
-                    <div id="covidWeekFive"></div>
-                </li>
-            </ol>
+        
+        <table class="table">
+          <thead id="tableHead">
+            <th>Week</th>
+            <th>Total New Cases</th>
+            <th>Total New Deaths</th>
+          </thead>
+          <tbody>
+            <tr id="tableRow">
+              <td>29-35 Days Ago</td>
+              <td id="week5CasesVisible"></td>
+              <td id="week5DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow"> 
+              <td>22-28 Days Ago</td>
+              <td id="week4CasesVisible"></td>
+              <td id="week4DeathsVisible"></td>            
+            </tr>
+            <tr id="tableRow">
+              <td>15-21 Days Ago</td>
+              <td id="week3CasesVisible"></td>
+              <td id="week3DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow">
+              <td>8-14 Days Ago</td>
+              <td id="week2CasesVisible"></td>
+              <td id="week2DeathsVisible"></td>
+            </tr>
+            <tr id="tableRow">
+              <td>Last 7 Days</td>
+              <td id="week1CasesVisible"></td>
+              <td id="week1DeathsVisible"></td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="about-tiles">
             <!--Developed By-->

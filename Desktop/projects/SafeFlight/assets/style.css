@@ -142,12 +142,22 @@ main .results-wrap .resultbox-wrap .resultbox {
   cursor: pointer;
   border-radius: 15px;
   display: flex;
+  justify-content: center;
 }
 
 main .results-wrap .resultbox-wrap .resultbox:hover {
   border: 3px;
   color: #003459;
   background: #F5B041;
+}
+
+main .resultbox {
+  padding: 5px 10px;
+}
+
+main .resultbox textbox {
+  color: #1e5d86;
+  margin: auto 10px;
 }
 
 main .position-right {
@@ -368,4 +378,12 @@ main .virus {
 
 #data-table {
   display: none;
+}
+
+#myChart {
+  cursor: pointer;
+}
+
+#myChartDeath {
+  cursor: pointer;
 }

@@ -325,6 +325,12 @@ main #slide1:checked ~ #bullets label:nth-child(1), main #slide2:checked ~ #bull
   background: #444;
 }
 
+@media screen and (max-width: 1375px) {
+  #howItWorks {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   header {
     height: 35vh;

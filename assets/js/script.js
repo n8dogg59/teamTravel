@@ -70,9 +70,11 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
     {"name": "Wisconsin", "abbreviation": "WI"},
     {"name": "Wyoming", "abbreviation": "WY"}]
     
+    // First function that is ran when get results button is clicked.  This function gets the city, state and state abbreviation from the airport code and passes those 
+    // into the getCounty and totalStateCases function.  Airport-info is the api that is used to get this information.
     function getCityState() {
+        document.getElementById("tableVisible").style.display = "";
         var airportCode = searchAirportEl.value.trim();  
-        // This function will get the city and state from the airport code the user inputs
         fetch("https://airport-info.p.rapidapi.com/airport?iata=" + airportCode, { 
             "method": "GET",
             "headers": {
@@ -82,7 +84,6 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
         })
             .then(response => {
                 return response.json().then(function (response) {
-                    console.log(response);
                     var resultLocation = response.location;
                     var searchedCity = resultLocation.split(',',1);
                     var searchedState = response.state;
@@ -99,7 +100,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                 console.error(err);
             });
     }
-    // This function gets the county from the city by getting the longitude and latitude of the city first then finding the county.
+    // This function receives the city name and gets the county name by getting the longitude and latitude of the city first then finding the county.  The county name, 
+    // state name, and state abbreviation is then passed into the countyInfo function.  Openweathermap api is used to get the longitude and latitude and then 
+    // fcc.gov api uses those variables to get the county name and state name.
     function getCounty(searchedCity) {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchedCity + weatherKey + "&units=imperial")
             .then(function(response) {
@@ -107,8 +110,6 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                     return response.json().then(function (response) {
                         var latitude = response.coord.lat;
                         var longitude = response.coord.lon;
-                        // console.log(latitude);
-                        // console.log(longitude);
                         fetch("https://geo.fcc.gov/api/census/block/find?latitude=" + latitude + "&longitude=" + longitude + "&showall=true&format=json")
                             .then(function(response) {
                                 if (response.ok) {
@@ -126,9 +127,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
             })
     }    
     
-    // This function get the total confirmed cases for the county.  It's the total overall cases from the start of the pandemic and not
-    // just the total recent cases.  We still need to figure out how to pass the county into this function because it's manually entered
-    // right now.
+    // This function get the total confirmed cases for the county.  It receives the county name, state name, and state abbreviation from the getCounty function
+    // It's the total overall cases from the start of the pandemic and not just the total recent cases.  It then passes the county name, state name, county cases,
+    // and county deaths to the countyPopulation function. Coronvirus-smartable api is used to get the total confirmed cases for the county.
     
     function countyInfo(countyName, stateName, stateAbbr) {
         fetch("https://coronavirus-smartable.p.rapidapi.com/stats/v1/US-" + stateAbbr + "/", {
@@ -140,13 +141,9 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
             })
                 .then(response => {
                     return response.json().then(function (response) {
-                        // console.log(response);
                         var countyLength = response.stats.breakdowns;
-                        // console.log(countyLength);
                         for (i = 0; i < countyLength.length; i++) {
                             if (countyLength[i].location.county === countyName) {
-                                //console.log("Total Confirmed Cases in " + countyName + " County = " + countyLength[i].totalConfirmedCases);
-                                //console.log("Total Deaths in " + countyName + " County = " + countyLength[i].totalDeaths);
                                 var countyDeaths = countyLength[i].totalDeaths;
                                 var countyCases = countyLength[i].totalConfirmedCases;
                                 countyPopulation(countyName, stateName, countyCases, countyDeaths);
@@ -159,17 +156,17 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                 });
     }            
         
+    // This function gets the percentage of the county that tested positive since the start of the pandemic.  It receives the county name, state name, county cases
+    // and county deaths from the countyInfo function.  Census.gov api is used to get the population of the county.
     function countyPopulation(countyName, stateName, countyCases, countyDeaths) {
         fetch("https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=county:*&key=" + countyPopKey)
                 .then(function(response) {
                     if (response.ok) {
                         return response.json().then(function (response) {
                             var totalCounties = response;
-                            // console.log(totalCounties);
                             for (i = 0; i < totalCounties.length; i++) {
                                 if (totalCounties[i][0] === countyName + " County, " + stateName) {
                                     var countyPopulation = totalCounties[i][1];
-                                    //console.log("Population of " + countyName + " County = " + countyPopulation);
                                 }
                             }
                             percentInfected = (countyCases / countyPopulation) * 100;
@@ -181,15 +178,14 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                 })
     }                
 
-    // This function gets the total new cases for each week.  The state data is manually added to the fetch but we should be able
-    // to get that from the input from the user or if we don't have them input the state then we'll get it from the city in another
-    // fetch and pass it in.
+    // This function gets the total new cases for each week.  It receives the state abbreviation and the state name from the getCityState function.  It then uses that
+    // data to create a bar chart for the positive covid test per week and the total new deaths per week for the state the user is looking to travel too. 
+    // Covidtracking.com api is used to get the daily and weekly state cases and deaths.
     function totalStateCases(stateAbbr, searchedState) {
         fetch("https://api.covidtracking.com/v1/states/" + stateAbbr + "/daily.json")
             .then(function(response) {
                 if (response.ok) {
                     return response.json().then(function (response) {
-                        //console.log(response);
                         var dailyCases = response[1].positiveIncrease;
                         var week1TotalCases = 0;
                         var week2TotalCases = 0;
@@ -275,6 +271,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         document.getElementById("week4DeathsVisible").innerHTML = week4DeathIncreaseVisible;
                         document.getElementById("week5DeathsVisible").innerHTML = week5DeathIncreaseVisible;
 
+                        // This starts the chart.js building of the charts
                         var table = document.getElementById('dataTable');
                         
                         var json = []; // First row needs to be headers 
@@ -291,7 +288,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         }
                         json.push(rowData);
                         }
-                        console.log(json)
+                        // This function builds the bar chart for the weekly covid cases.
                         function BuildChart(labels, values, chartTitle) {
                             var ctx = document.getElementById("myChart").getContext('2d');
                             var myChart = new Chart(ctx, {
@@ -336,15 +333,21 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                                 }
                                            }                            
                                         }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            padding: 10
+                                        }
                                     }]
                                 }
                                 }
                             });
-                            console.log(myChart);
-                            console.log(values);
+                            // console.log(myChart);
+                            // console.log(values);
                             return myChart;
                             }
 
+                        // This builds the line chart that shows the weekly covid deaths.
                         function BuildChart2(labels, values, chartTitle) {
                             var ctx = document.getElementById("myChartDeath").getContext('2d');
                             var myChart = new Chart(ctx, {
@@ -380,7 +383,7 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                 scales: {
                                     yAxes: [{
                                         ticks: {
-                                            suggestedMin: 500,
+                                            suggestedMin: 1000,
                                             //beginAtZero:true,
                                             callback: function(value, index, values) {
                                                 if(parseInt(value) >= 1000){
@@ -391,16 +394,18 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                                            }                            
                                         }
                                     }],
-                                    // xAxes: [{
-                                    //     offset: true
-                                    // }]
+                                    xAxes: [{
+                                        ticks: {
+                                            padding: 10
+                                        }
+                                    }]
                                 }
                                 
                                     
                                 
                                 }
                             });
-                            console.log(myChart);
+                            // console.log(myChart);
                             return myChart;
                             }
 
@@ -408,15 +413,15 @@ var cityStateArr = [{"name": "Alabama", "abbreviation": "AL"},
                         var labels = json.map(function (e) {
                             return e.week;
                         });
-                        console.log(labels); // ["2016", "2017", "2018", "2019"]
+                        // console.log(labels); 
 
                         // Map JSON values back to values array
                         var values = json.map(function (e) {
                             return e.totalnewcases;
                         });
-                        console.log(values); // ["10", "25", "55", "120"]
+                        // console.log(values); 
                         var chart = BuildChart(labels, values, "Weekly COVID Cases for " + searchedState);
-                        console.log(chart);
+                        // console.log(chart);
                         var deathValues = json.map(function (f) {
                             return f.totalnewdeaths;
                         });

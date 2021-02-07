@@ -142,7 +142,6 @@ main .results-wrap .resultbox-wrap .resultbox {
   max-width: 768px;
   margin: 0 auto;
   border: 2px solid #2471A3;
-  height: 60px;
   margin-bottom: 50px;
   cursor: pointer;
   border-radius: 15px;
@@ -326,6 +325,13 @@ main #slide1:checked ~ #bullets label:nth-child(1), main #slide2:checked ~ #bull
   background: #444;
 }
 
+@media screen and (max-width: 1024px) {
+  header {
+    height: 35vh;
+  }
+}
+
+
 @media screen and (max-width: 900px) {
   main #slide1:checked ~ #controls label:nth-child(2), main #slide2:checked ~ #controls label:nth-child(3), main #slide3:checked ~ #controls label:nth-child(4), main #slide4:checked ~ #controls label:nth-child(1), main #slide1:checked ~ #controls label:nth-last-child(2), main #slide2:checked ~ #controls label:nth-last-child(3), main #slide3:checked ~ #controls label:nth-last-child(4), main #slide4:checked ~ #controls label:nth-last-child(1) {
     margin: 0;
@@ -390,4 +396,16 @@ main .virus {
 
 #myChartDeath {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  #countyCases {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  header {
+    height: 30vh;
+  }
 }

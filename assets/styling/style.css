@@ -383,3 +383,11 @@ main .virus {
   background-color: transparent;
 }
 /*# sourceMappingURL=style.css.map */
+
+#myChart {
+  cursor: pointer;
+}
+
+#myChartDeath {
+  cursor: pointer;
+}

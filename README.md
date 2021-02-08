@@ -20,7 +20,7 @@ https://n8dogg59.github.io/teamTravel/
 * Openweathermap
 * FCC
 * Coronavirus-smartable
-* Census.gov
+* Census
 * Covidtracking
 
 ## Built With 
@@ -30,6 +30,7 @@ https://n8dogg59.github.io/teamTravel/
 * Chart.js
 * jQuery
 * HTML 
+* CSS
 
 ## Contributing
 * Jose Ramirez

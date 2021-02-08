@@ -12,8 +12,8 @@ $(document).ready(function() {
 var getAuth = function() {
     flightsEl.textContent = "";
     var urlencoded = new URLSearchParams();
-    urlencoded.append("client_id", flight_api_id);
-    urlencoded.append("client_secret", flight_api_secret);
+    urlencoded.append("client_id", config.flight_api_id);
+    urlencoded.append("client_secret", config.flight_api_secret);
     urlencoded.append("grant_type", "client_credentials");
 
     var requestAuth = {
